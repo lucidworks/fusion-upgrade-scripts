@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Run the Spark worker apps.
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=${FUSION_HOME:-`cd "${BIN}/.."; pwd`}
+export SPARK_HOME="${SPARK_HOME:-$FUSION_HOME/spark}"
+export APP_BASE="$FUSION_HOME/apps"
+export APP_HOME="${SPARK_WORKER_HOME:-${APP_BASE}/spark-worker}"
+FUSION_SERVICE_NAME="Fusion Spark Worker"
+VAR_DIR="$FUSION_HOME/var"
+LOG_DIR="$FUSION_HOME/logs/spark-worker"
+PID_FILE="$VAR_DIR/spark-worker.pid"
+
+PORT_NAME='spark-worker'
+
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${SPARK_WORKER_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  cd "$APP_HOME"
+
+  mkdir -p "$LOG_DIR"
+
+  report_port
+  write_pid_file
+
+  export SPARK_WORKER_OPTS="${JAVA_OPTIONS[@]} \
+    -Dcurator.zk.connect='$FUSION_ZK' \
+    -Dcom.lucidworks.apollo.solr.zk.connect='$FUSION_SOLR_ZK' \
+    -Dlog4j.configurationFile=file:'$APP_HOME'/log4j2.xml \
+    -Dspark.worker.port=$SPARK_WORKER_PORT \
+    -Dspark.worker.webui.port=$SPARK_WORKER_UI_PORT \
+    -Dapollo.home='$FUSION_HOME' \
+    -Dspark.home='$SPARK_HOME'"
+
+  set -x
+  exec ${APP_HOME}/bin/spark-worker $@
+
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

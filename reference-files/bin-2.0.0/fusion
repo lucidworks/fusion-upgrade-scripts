@@ -1,0 +1,79 @@
+#!/bin/bash
+#
+# Run all of Fusion
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+
+DATEFORMAT="+%Y-%m-%d %H:%M:%SZ"
+
+set -e
+
+cd "$FUSION_HOME"
+
+. "$FUSION_HOME/bin/common.sh"
+check_java
+
+function do_usage() {
+  echo "Usage: $0 [start, stop, restart, status]"
+  exit 1
+}
+
+function do_start_all() {
+  "$FUSION_HOME/bin/zookeeper" start
+  sleep 10
+  "$FUSION_HOME/bin/solr" start
+  sleep 25
+  "$FUSION_HOME/bin/api" start
+  sleep 5
+  "$FUSION_HOME/bin/connectors" start
+  sleep 5
+  "$FUSION_HOME/bin/ui" start
+  sleep 5
+}
+
+function do_status_all() {
+  "$FUSION_HOME/bin/connectors" status
+  "$FUSION_HOME/bin/api" status
+  "$FUSION_HOME/bin/spark-master" status
+  "$FUSION_HOME/bin/spark-worker" status
+  "$FUSION_HOME/bin/ui" status
+  "$FUSION_HOME/bin/solr" status
+  "$FUSION_HOME/bin/zookeeper" status
+}
+
+function do_stop_all() {
+  "$FUSION_HOME/bin/ui" stop
+  sleep 5
+  "$FUSION_HOME/bin/connectors" stop
+  sleep 5
+  "$FUSION_HOME/bin/api" stop
+  sleep 5
+  "$FUSION_HOME/bin/solr" stop
+  sleep 5
+  "$FUSION_HOME/bin/zookeeper" stop
+}
+
+function do_restart_all() {
+  do_stop_all
+  do_start_all
+}
+
+if [ "$1" = "start" ]; then
+  do_start_all
+elif [ "$1" = "stop" ]; then
+  do_stop_all
+elif [ "$1" = "restart" ]; then
+  do_restart_all
+elif [ "$1" = "status" ]; then
+  do_status_all
+elif [ "$1" = "help" ]; then
+  do_usage
+elif [ "x$1" = "x" ]; then
+  echo "Missing action. Did you mean: $0 start"
+  do_usage
+else
+  echo "Unknown action: $1"
+  do_usage
+fi
