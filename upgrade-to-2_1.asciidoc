@@ -178,9 +178,6 @@ To identify changes, use the *nix `diff` command with the `-r` flag, e.g. if FUS
 In Fusion 2.1, the configuration files "config.sh" and "config.cmd" have been moved to directory "fusion-new/conf"
 and the scripts to run the Fusion services remain in "fusion-new/bin".
 
-NOTE: if you are running external ZooKeeper (recommended for production system), you should edit the Solr start script in file
-"fusion-new/bin/solr" and delete the command which starts the embedded ZooKeeper.  This line is: `-DzkRun \ `
-
 [[step-2]]
 Step 2. Copy JDBC driver jarfiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
