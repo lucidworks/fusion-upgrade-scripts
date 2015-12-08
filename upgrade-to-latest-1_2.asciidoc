@@ -18,21 +18,21 @@ To upgrade while leaving FUSION-CURRENT deployment in place, you must set up par
 If either the local ZooKeeper or Solr installation is being used, this data must be copied over from the current to the new installation.
 
 
-* link:#prep-1[Download, unpack FUSION-NEW]
+* link:#step-1[Download, unpack FUSION-NEW]
 
-* link:#prep-2[Copy embedded ZooKeeper and/or Solr]
+* link:#step-2[Copy embedded ZooKeeper and/or Solr]
 If Fusion is using either the ZooKeeper or the Solr installation included with the Fusion distribution or both,
 the ZooKeeper and Solr data must be copied from FUSION-CURRENT to FUSION-NEW.
 
-* link:#step-1[Save custom settings in Fusion configuration files and run scripts.] Preserve customizations, including settings for external ZooKeeper and Solr.
+* link:#step-3[Save custom settings in Fusion configuration files and run scripts.] Preserve customizations, including settings for external ZooKeeper and Solr.
 
-* link:#step-2[Copy crawldb.] Preserve information about what has been indexed by Fusion datasources.
+* link:#step-4[Copy crawldb.] Preserve information about what has been indexed by Fusion datasources.
 
-* link:#step-3[Copy JDBC driver jarfiles.] Only required for JDBC datasources.
+* link:#step-5[Copy JDBC driver jarfiles.] Only required for JDBC datasources.
 
 
 
-[[prep-1]]
+[[step-1]]
 Download, unpack FUSION-NEW
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -60,7 +60,7 @@ To avoid this, run the following commands:
 If you are working on a Windows machine, the zipfile unzips into a folder named "fusion-1.2.7" which contains a folder named "fusion".
 Rename "fusion" to "fusion-new" and moved it into folder INSTALL-DIR.
 
-[[prep-2]]
+[[step-2]]
 Copy embedded ZooKeeper and/or Solr (as needed)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -105,12 +105,8 @@ Only in fusion/solr: zoo.cfg
 Only in fusion/solr: zoo_data
 ------------------------------------------
 
-[[reconfig]]
-Reconfiguration
----------------
 
-
-[[step-1]]
+[[step-3]]
 Save custom settings in Fusion configuration files and run scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -157,7 +153,7 @@ To identify changes, use the *nix `diff` command with the `-r` flag, e.g. if FUS
 > diff -r INSTALL-DIR/fusion/bin FUSION-UPGRADE-SCRIPTS/reference-files/bin-1.2.3
 ------------------------------------
 
-[[step-2]]
+[[step-4]]
 
 Copy the crawldb
 ^^^^^^^^^^^^^^^^
@@ -171,7 +167,7 @@ Copy the Fusion "crawldb" directory:
 ------------------------------------
 
 
-[[step-3]]
+[[step-5]]
 Copy JDBC driver jarfiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
