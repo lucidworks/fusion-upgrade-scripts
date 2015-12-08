@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# Run the Fusion API web app in Jetty
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+export JETTY_HOME="$FUSION_HOME/jetty/home"
+export JETTY_BASE="$FUSION_HOME/jetty/api"
+FUSION_SERVICE_NAME="Fusion API Services"
+VAR_DIR="$FUSION_HOME/var"
+LOG_DIR="$FUSION_HOME/logs/api"
+PID_FILE="$VAR_DIR/api.pid"
+
+PORT_NAME='api'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${API_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  cd "$JETTY_BASE"
+
+  mkdir -p "$LOG_DIR"
+
+  report_port
+  write_pid_file
+
+  set -x
+  exec "$JAVA" \
+    "-DAPOLLO" \
+    "${JAVA_OPTIONS[@]}" \
+    "-Djava.io.tmpdir=$JETTY_BASE/work" \
+    "-Dlog4j.configurationFile=file:$JETTY_BASE/resources/log4j2.xml" \
+    "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager" \
+    "-Dcurator.zk.connect=$FUSION_ZK" \
+    "-Dcom.lucidworks.apollo.solr.zk.connect=$FUSION_SOLR_ZK" \
+    "-Dcom.lucidworks.apollo.app.port=$HTTP_PORT" \
+    "-Dapollo.home=$FUSION_HOME" \
+    "-XX:OnOutOfMemoryError=$FUSION_HOME/bin/oom.sh api" \
+    -jar "$JETTY_HOME/start.jar" \
+    "jetty.home=$JETTY_HOME" \
+    "jetty.base=$JETTY_BASE" \
+    "jetty.port=$HTTP_PORT" \
+    "STOP.PORT=$STOP_PORT" \
+    "STOP.KEY=$STOP_KEY" \
+    "$JETTY_BASE/etc/jetty-logging.xml"
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

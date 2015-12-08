@@ -1,0 +1,81 @@
+Instruction Sets
+----------------
+
+[width="100%",cols="2a,2a,5a",options="header",]
+|===============================================================================================================================
+|CURRENT |NEW |Instruction Set
+|1.2.3 through 2.0.0 |latest 2.1 |link:upgrade-to-2_1.asciidoc[upgrade to latest 2.1]
+|===============================================================================================================================
+
+Overview
+--------
+
+This repository contains scripts and instructions for upgrading a Fusion deployment.
+To upgrade Fusion you must install the new Fusion version and carry forward configurations,
+customizations, and indexing history from the current version.
+
+The process of installing and configuring a new version of Fusion varies according to:
+
+* the current and new versions of Fusion
+* the current and new deployment configurations
+
+If the current Fusion deployment uses the embedded Solr server for all Fusion collections, then
+these collections must be copied over to the embedded Solr server in the new deployment.
+Otherwise, the new Fusion deployment will work with the existing Solr.
+
+
+Rollbacks and Changeover
+------------------------
+
+The upgrade process leaves the current Fusion deployment in place while a new Fusion deployment
+is installed and configured.  All of the upgrade operations copy information from the current Fusion
+over to the new Fusion.  This provides a rollback option should the upgrade procedure encouter problems.
+
+The current Fusion configurations must remain as-is during the upgrade process.
+The upgrade process requires stopping the current Fusion installation in order to
+start up the new Fusion installation, therefore upgrades must be carried out on a staging server
+in order to avoid an outage of service during the upgrade.
+
+Terminology and Directory Names
+-------------------------------
+
+* FUSION-CURRENT:  version of current Fusion deployment.
+* FUSION-NEW:  upgrade version.
+* INSTALL-DIR: All scripts and commands in the upgrade instruction set are carried out from this directoy.
+This directory must contain either the actual or a copy of FUSION-CURRENT.
+The upgrade instructions create and configure FUSION-NEW in this directory.
+* FUSION-UPGRADE-SCRIPTS:  the location of this repository.
+
+Upgrade Planning and Checklists
+-------------------------------
+
+* Disk space requirements: the INSTALL-DIR must be on a disk partition which has enough free space for the FUSION-NEW installation,
+which will be at least as large as FUSION-CURRENT.
+
+* File-system permissions: the user running the upgrade scripts and commands must have read/write/execute (rwx) permissions on directory FUSION-CURRENT.
+
+* Upgrade script requirements: the upgrade script is written in Python
+and uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
+If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
+
+* FUSION-CURRENT inventory.  Identify the following components needed for the current production system:
+** all collections
+** all datasources, index and query pipelines, pipeline profiles
+** all Fusion users/roles
+** any JDBC drivers (if using JDBC datasources)
+
+Validating Upgrade
+------------------
+
+NOTE: Clear your browser cache before you accessing the FUSION-NEW UI.
+
+Start the FUSION-NEW installation and login to the Fusion UI, using the
+the same admin username and password as used for FUSION-CURRENT.
+
+Check that:
+
+* FUSION-NEW has the same sets of collections as FUSION-CURRENT, and that each collection has the same number of documents.
+* Search over these collections works as expected.
+* Each collection has the same set of datasources.
+* The index and query pipelines in FUSION-NEW correspond to those in FUSION-CURRENT.
+* The users and roles in FUSION-NEW correspond to those in FUSION-CURRENT.
