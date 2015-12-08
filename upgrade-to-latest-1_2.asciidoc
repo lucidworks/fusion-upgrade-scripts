@@ -3,18 +3,50 @@ Instructions: Upgrade to latest Fusion 1.2
 
 This set of upgrade instructions is for
 
+<<<<<<< HEAD
+* FUSION-CURRENT:  Fusion 1.2 version at 1.2.3 or higher
+* FUSION-NEW: the latest version of Fusion 1.2
+=======
 * FUSION-CURRENT: Fusion 1.2 versions which are 1.2.3 or later
 * FUSION-NEW: latest version of Fusion 1.2
+>>>>>>> master
 
 INSTALL-DIR refers to the parent directory of the FUSION-CURRENT deployment or a staging directory
 which contains a copy of the FUSION-CURRENT installation.
 All commands in the upgrade instruction set are run from this directory.
+<<<<<<< HEAD
+
+
+Upgrade Process Overview
+------------------------
+
+To upgrade while leaving FUSION-CURRENT deployment in place, you must set up parallel current and new Fusion installs in the INSTALL-DIR.
+If either the local ZooKeeper or Solr installation is being used, this data must be copied over from the current to the new installation.
+
+
+* link:#step-1[Download, unpack FUSION-NEW]
+
+* link:#step-2[Copy embedded ZooKeeper and/or Solr]
+If Fusion is using either the ZooKeeper or the Solr installation included with the Fusion distribution or both,
+the ZooKeeper and Solr data must be copied from FUSION-CURRENT to FUSION-NEW.
+
+* link:#step-3[Save custom settings in Fusion configuration files and run scripts.] Preserve customizations, including settings for external ZooKeeper and Solr.
+
+* link:#step-4[Copy crawldb.] Preserve information about what has been indexed by Fusion datasources.
+
+* link:#step-5[Copy JDBC driver jarfiles.] Only required for JDBC datasources.
+
+
+
+[[step-1]]
+=======
 The name of the FUSION-CURRENT directory is "fusion".
 The name of the FUSION-NEW directory is "fusion-new".
 
 Pre-requisites
 --------------
 
+>>>>>>> master
 Download, unpack FUSION-NEW
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -29,19 +61,33 @@ The latest Fusion distribution is available from https://lucidworks.com/products
 It is distributed as a gzipped tar file or as a compressed zip file.
 
 Create a new directory named "fusion-new" and unpack the contents of the distribution here.
+<<<<<<< HEAD
+For example, to upgrade to Fusion 1.2.7, the archive file is named "fusion-1.2.7.tar.gz".
+=======
 For example, to upgrade to Fusion 2.1.1, the archive file is named "fusion-2.1.1.tar.gz".
+>>>>>>> master
 The default tar -xf command would unpack this into a directory named "fusion"
 which would overwrite parts of the FUSION-CURRENT installation.
 To avoid this, run the following commands:
 
 ------------------------------------------
 > mkdir fusion-new
+<<<<<<< HEAD
+> tar -C fusion-new --strip-components=1 -xf fusion-1.2.7.tar.gz
+------------------------------------------
+
+If you are working on a Windows machine, the zipfile unzips into a folder named "fusion-1.2.7" which contains a folder named "fusion".
+Rename "fusion" to "fusion-new" and moved it into folder INSTALL-DIR.
+
+[[step-2]]
+=======
 > tar -C fusion-new --strip-components=1 -xf fusion-2.1.1.tar.gz
 ------------------------------------------
 
 If you are working on a Windows machine, the zipfile unzips into a folder named "fusion-2.1.1" which contains a folder named "fusion".
 Rename "fusion" to "fusion-new" and moved it into folder INSTALL-DIR.
 
+>>>>>>> master
 Copy embedded ZooKeeper and/or Solr (as needed)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -56,8 +102,13 @@ If you are using an external ZooKeeper but using Fusion's local Solr install, yo
 To copy the ZooKeeper configuration:
 
 ------------------------------------------
+<<<<<<< HEAD
+> mkdir -p fusion-new/solr/zoo_data
+> cp -R fusion/solr/zoo_data/* fusion-new/solr/zoo_data
+=======
 > mkdir -p fusion-new/data/zookeeper
 > cp -R fusion/solr/zoo_data/* fusion-new/data/zookeeper
+>>>>>>> master
 ------------------------------------------
 
 To copy the Solr data:
@@ -69,6 +120,19 @@ To copy the Solr data:
 If the Solr collections are very large this may take a while.
 
 
+<<<<<<< HEAD
+[[step-3]]
+Save custom settings in Fusion configuration files and run scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Fusion configuration files define environment variables used in the Fusion run scripts.
+The Fusion run scripts start and stop Fusion services.
+If you are using an external ZooKeeper, or have changed memory limits on any Fusion services,
+these files will have been changed.
+You must identify those changes and then *edit* the files in "fusion-new" accordingly,
+because other changes and optimizations may have been added to these files in later releases
+which would be lost by doing a copy command.
+=======
 Upgrade Steps
 -------------
 
@@ -90,6 +154,7 @@ The script link:bin/download_upload_ds_pipelines.py[download_upload_ds_pipelines
 
 Step 1. Edit Fusion configuration files and run scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>>>>>>> master
 
 In Fusion 1.2, the "fusion/bin" directory contains configuration files and run scripts for all Fusion services:
 
@@ -115,17 +180,51 @@ ui
 ui.cmd
 ------------------------------------
 
+<<<<<<< HEAD
+=======
 If these files have been customized for your installation, you must identify those changes and then *edit* the files in "fusion-new" accordingly.
 These files change from release to release as the product evolves;
 These changes will be lost by replacing the new run scripts with the old one by a copy command,
 thus a by-hand edit is needed to properly carry over customizations.
 
+>>>>>>> master
 To facilitate the task of identifying changes made to the current installation,
 the fusion-upgrade-scripts repository contains a directory "reference-files" which
 contains bin directories for Fusion releases 1.2.3, 1.2.4, and 1.2.6 named "bin-1.2.3", "bin-1.2.4", and "bin-1.2.6".
 To identify changes, use the *nix `diff` command with the `-r` flag, e.g. if FUSION-CURRENT is 1.2.3, then the command is:
 
 ------------------------------------
+<<<<<<< HEAD
+> diff -r INSTALL-DIR/fusion/bin FUSION-UPGRADE-SCRIPTS/reference-files/bin-1.2.3
+------------------------------------
+
+[[step-4]]
+
+Copy the crawldb
+^^^^^^^^^^^^^^^^
+
+The Fusion "crawldb" records the results of running datasource jobs.  This information must be copied from FUSION-CURRENT to FUSION-NEW.
+
+Copy the Fusion "crawldb" directory:
+
+------------------------------------
+> cp -R fusion/data/connectors/crawldb fusion-new/data/connectors/
+------------------------------------
+
+
+[[step-5]]
+Copy JDBC driver jarfiles
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The jarfiles for any JDBC drivers used by a JDBC datasource are found in directory:  "fusion/data/connectors/lucid.jdbc"
+Copy the contents of this directory over to the "fusion-new" directory:
+
+------------------------------------
+> cp -R fusion/data/connectors/lucid.jdbc fusion-new/data/connectors/
+------------------------------------
+
+
+=======
 > diff -r INSTALL-DIR/fusion/bin repo-dir/bin-1.2.3
 ------------------------------------
 
@@ -199,11 +298,16 @@ Copy the Fusion "crawldb" directory:
 > cp -R fusion/data/connectors/crawldb fusion-new/data/connectors/
 ------------------------------------
 
+>>>>>>> master
 This completes the upgrade process.
 
 At this point, you should validate the FUSION-NEW, per instructions in the link:README.asciidoc.
 Once validated, you can archive and/or delete the directory INSTALL-DIR/fusion
+<<<<<<< HEAD
+and then rename INSTALL-DIR/fusion-new to INSTALL-DIR/fusion.
+=======
 and rename INSTALL-DIR/fusion-new to INSTALL-DIR/fusion.
 
 
 
+>>>>>>> master
