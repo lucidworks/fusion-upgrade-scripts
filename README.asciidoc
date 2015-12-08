@@ -46,37 +46,36 @@ This directory must contain either the actual or a copy of FUSION-CURRENT.
 The upgrade instructions create and configure FUSION-NEW in this directory.
 * FUSION-UPGRADE-SCRIPTS:  the location of this repository.
 
-Planning Checklist
-------------------
+Upgrade Planning and Checklists
+-------------------------------
 
 * Disk space requirements: the INSTALL-DIR must be on a disk partition which has enough free space for the FUSION-NEW installation,
 which will be at least as large as FUSION-CURRENT.
 
 * File-system permissions: the user running the upgrade scripts and commands must have read/write/execute (rwx) permissions on directory FUSION-CURRENT.
 
-* The upgrade script is written in Python.
-It uses external libraries http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
+* Upgrade script requirements: the upgrade script is written in Python
+and uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
 If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
 
 * FUSION-CURRENT inventory.  Identify the following components needed for the current production system:
-** all Collections
-** all Datasources, index and query pipelines, pipeline profiles
-** all Fusion Users/Roles
+** all collections
+** all datasources, index and query pipelines, pipeline profiles
+** all Fusion users/roles
 ** any JDBC drivers (if using JDBC datasources)
-** any custom plugins
 
 Validating Upgrade
 ------------------
 
-If the FUSION-NEW installation is not currently running, start it.
+NOTE: Clear your browser cache before you accessing the FUSION-NEW UI.
 
-NOTE: Clear your browser cache before accessing the Fusion UI.
+Start the FUSION-NEW installation and login to the Fusion UI, using the
+the same admin username and password as used for FUSION-CURRENT.
 
-Login to the Fusion UI.
-Once you're setthe new admin password and registered, you should verify the following:
+Check that:
 
-* the Collections in FUSION-NEW are the same as in FUSION-CURRENT, with the same number of documents.
-* search over these collections works as expected.
-* each Collection has the same set of datasources.
-* the index and query pipelines in FUSION-NEW correspond to those in FUSION-CURRENT.
-* the Users and Roles in FUSION-NEW correspond to those in FUSION-CURRENT.
+* FUSION-NEW has the same sets of collections as FUSION-CURRENT, and that each collection has the same number of documents.
+* Search over these collections works as expected.
+* Each collection has the same set of datasources.
+* The index and query pipelines in FUSION-NEW correspond to those in FUSION-CURRENT.
+* The users and roles in FUSION-NEW correspond to those in FUSION-CURRENT.
