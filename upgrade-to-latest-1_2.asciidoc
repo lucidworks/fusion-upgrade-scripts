@@ -75,15 +75,8 @@ If you are using an external ZooKeeper but using Fusion's local Solr install, yo
 To copy the ZooKeeper configuration:
 
 ------------------------------------------
-> mkdir -p fusion-new/data/zookeeper
-> cp -R fusion/solr/zoo_data/* fusion-new/data/zookeeper
-------------------------------------------
-
-To check your work: compare the directories `fusion/solr/zoo_data/` and `fusion-new/data/zookeeper`
-using the `diff` command.  This command succeeds silently when the contents are the same.
-
-------------------------------------------
-> diff -r fusion/solr/zoo_data fusion-new/data/zookeeper
+> mkdir -p fusion-new/solr/zoo_data
+> cp -R fusion/solr/zoo_data/* fusion-new/solr/zoo_data
 ------------------------------------------
 
 To copy the Solr data:
@@ -94,17 +87,6 @@ To copy the Solr data:
 
 If the Solr collections are very large this may take a while.
 
-You can use the `diff` command to check your work.
-The copy command excluded ZooKeeper config data, therefore
-you should see the following output:
-
-------------------------------------------
-> diff -r fusion/solr fusion-new/data/solr
-Only in fusion-new/data/solr: configsets
-Only in fusion/solr: zoo.cfg
-Only in fusion/solr: zoo_data
-------------------------------------------
-
 
 [[step-3]]
 Save custom settings in Fusion configuration files and run scripts
@@ -114,6 +96,9 @@ The Fusion configuration files define environment variables used in the Fusion r
 The Fusion run scripts start and stop Fusion services.
 If you are using an external ZooKeeper, or have changed memory limits on any Fusion services,
 these files will have been changed.
+You must identify those changes and then *edit* the files in "fusion-new" accordingly,
+because other changes and optimizations may have been added to these files in later releases
+which would be lost by doing a copy command.
 
 In Fusion 1.2, the "fusion/bin" directory contains configuration files and run scripts for all Fusion services:
 
@@ -138,11 +123,6 @@ spark-worker.cmd
 ui
 ui.cmd
 ------------------------------------
-
-If these files have been customized for your installation, you must identify those changes and then *edit* the files in "fusion-new" accordingly.
-New changes and optimizations may have been added to these files in later releases.
-These changes will be lost by replacing the new with the old by a copy command,
-thus a by-hand edit is needed to properly carry over customizations.
 
 To facilitate the task of identifying changes made to the current installation,
 the fusion-upgrade-scripts repository contains a directory "reference-files" which
