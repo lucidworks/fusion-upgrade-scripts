@@ -5,6 +5,7 @@ Instruction Sets
 |===============================================================================================================================
 |CURRENT |NEW |Instruction Set
 |1.2.3 through 2.0.0 |latest 2.1 |link:upgrade-to-2_1.asciidoc[upgrade to latest 2.1]
+|1.2.3 through 1.2.x |latest 1.2 |link:upgrade-to-latest-1_2.asciidoc[upgrade to latest 1.2]
 |===============================================================================================================================
 
 Overview
