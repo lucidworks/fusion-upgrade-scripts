@@ -61,14 +61,26 @@ def upgrade_from_json(workspace, session, name, api_path):
         # Special case for datasources since the payloads are base64 encoded and we need to decode before submitting them
         if name == "datasources":
             obj = decode_password_json(obj)
-            resp = session.post("{0}/{1}".format(args.fusion_url, api_path),
-                           data=json.dumps(obj), headers={"Content-Type": "application/json"})
-            assert resp.status_code == 200, "Expected 200, got {}\n{} from url {}".format(resp.status_code, resp.content, resp.url)
+            try:
+                url = "{}/{}".format(args.fusion_url, api_path)
+                resp = session.post(url,
+                                    data=json.dumps(obj), headers={"Content-Type": "application/json"})
+                assert_response(resp, 200)
+            except Exception as e:
+                print "Exception while submitting datasource id {} for url {}. \n {}".format(obj['id'], url, e)
+                pass
         else:
-            resp = session.put("{0}/{1}/{2}".format(args.fusion_url, api_path, obj['id']),
-                               data=json.dumps(obj), headers={"Content-Type": "application/json"})
-            assert resp.status_code == 200, "Expected 200, got {}\n{} from url {}".format(resp.status_code, resp.content, resp.url)
+            try:
+                url = "{}/{}/{}".format(args.fusion_url, api_path, obj['id'])
+                resp = session.put(url,
+                                   data=json.dumps(obj), headers={"Content-Type": "application/json"})
+                assert_response(resp,200)
+            except Exception as e:
+                print "Exception while submitting resource {}. \n {}".format(url, e)
+                pass
 
+def assert_response(resp, 200):
+    assert resp.status_code == code, "Expected {}, got {}\n{} from url {}".format(code, resp.status_code, resp.content, resp.url)
 
 def decode_password_json(payload):
     if "properties" in payload:
