@@ -28,7 +28,7 @@ def dump_json_to_workspace(workspace, name, zk_path):
     Copy the JSON objects out of ZK and into a file in the workspace
     """
     if zk.exists("/lucid/{0}".format(zk_path)) is None:
-        json.dump([], open("{0}/{1}.json".format(workspace, name), "w"))
+        json.dump([], open("{0}/{1}.json".format(workspace, name), "w"), indent=4)
         return
 
     ids = zk.get_children("/lucid/{0}".format(zk_path))
@@ -38,7 +38,7 @@ def dump_json_to_workspace(workspace, name, zk_path):
         objects.append(json.loads(node))
 
     with open("{0}/{1}.json".format(workspace, name), "w") as fp:
-        json.dump(objects, fp)
+        json.dump(objects, fp, indent=4)
 
 def delete_paths(paths):
     """
