@@ -67,19 +67,19 @@ def upgrade_from_json(workspace, session, name, api_path):
                                     data=json.dumps(obj), headers={"Content-Type": "application/json"})
                 assert_response(resp, 200)
             except Exception as e:
-                print "Exception while submitting datasource id {} for url {}. \n {}".format(obj['id'], url, e)
+                print "Exception while submitting datasource id '{}' for url {}. \n {}".format(obj['id'], url, e)
                 pass
         else:
             try:
                 url = "{}/{}/{}".format(args.fusion_url, api_path, obj['id'])
                 resp = session.put(url,
                                    data=json.dumps(obj), headers={"Content-Type": "application/json"})
-                assert_response(resp,200)
+                assert_response(resp, 200)
             except Exception as e:
-                print "Exception while submitting resource {}. \n {}".format(url, e)
+                print "Exception while submitting resource '{}'. \n {}".format(url, e)
                 pass
 
-def assert_response(resp, 200):
+def assert_response(resp, code):
     assert resp.status_code == code, "Expected {}, got {}\n{} from url {}".format(code, resp.status_code, resp.content, resp.url)
 
 def decode_password_json(payload):
