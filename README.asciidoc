@@ -4,8 +4,8 @@ Instruction Sets
 [width="100%",cols="2a,2a,5a",options="header",]
 |===============================================================================================================================
 |CURRENT |NEW |Instruction Set
-|1.2.3 through 2.0.0 |latest 2.1 |link:upgrade-to-2_1.asciidoc[upgrade to latest 2.1]
-|1.2.3 through 1.2.x |latest 1.2 |link:upgrade-to-latest-1_2.asciidoc[upgrade to latest 1.2]
+|2.1.0 through 2.2.0 |latest 2.4 |link:upgrade-to-2_1.asciidoc[upgrade from 2.1 to latest 2.1]
+|1.2.3 through 2.0.0 |latest 2.1 |link:upgrade-to-2_1.asciidoc[upgrade from 1.2 to latest 2.1]
 |===============================================================================================================================
 
 Overview
@@ -20,9 +20,10 @@ The process of installing and configuring a new version of Fusion varies accordi
 * the current and new versions of Fusion
 * the current and new deployment configurations
 
+When running Fusion with an external Solr cluster, no migration of Solr or Solr data is required,
+simply configure the new Fusion version to use this external Solr cluster.
 If the current Fusion deployment uses the embedded Solr server for all Fusion collections, then
 these collections must be copied over to the embedded Solr server in the new deployment.
-Otherwise, the new Fusion deployment will work with the existing Solr.
 
 
 Rollbacks and Changeover
@@ -30,39 +31,56 @@ Rollbacks and Changeover
 
 The upgrade process leaves the current Fusion deployment in place while a new Fusion deployment
 is installed and configured.  All of the upgrade operations copy information from the current Fusion
-over to the new Fusion.  This provides a rollback option should the upgrade procedure encouter problems.
+over to the new Fusion.  This provides a rollback option should the upgrade procedure encounter problems.
 
 The current Fusion configurations must remain as-is during the upgrade process.
-The upgrade process requires stopping the current Fusion installation in order to
-start up the new Fusion installation, therefore upgrades must be carried out on a staging server
-in order to avoid an outage of service during the upgrade.
+In order to capture indexing job history, no indexing jobs should be running.
+If the new Fusion installation is being installed onto the same server
+that the current Fusion installation is running on, you must either:
+
+* run only one version at a time
+* https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Installing_Lucidworks_Fusion/Changing-the-Default-Ports.html[change the Fusion component server ports]
 
 Terminology and Directory Names
 -------------------------------
 
-* FUSION-CURRENT:  version of current Fusion deployment.
-* FUSION-NEW:  upgrade version.
-* INSTALL-DIR: All scripts and commands in the upgrade instruction set are carried out from this directoy.
-This directory must contain either the actual or a copy of FUSION-CURRENT.
-The upgrade instructions create and configure FUSION-NEW in this directory.
-* FUSION-UPGRADE-SCRIPTS:  the location of this repository.
+These instructions use the following names to refer to the directories involved in the upgrade procedure:
 
-Upgrade Planning and Checklists
--------------------------------
+* FUSION-CURRENT:  name of the FUSION_HOME directory for the current Fusion version, e.g. "/opt/lucidworks/fusion-2.1.2".
+* FUSION-NEW:  name of the directory of the upgrade Fusion distribution during the upgrade process, e.g. "/opt/lucidworks/fusion-2.4.1".
+* INSTALL-DIR: the directory where the new Fusion version will be installed, e.g. "opt/lucidworks".
+All scripts and commands in the upgrade instruction set are carried out from this directory.
+* FUSION-UPGRADE-SCRIPTS:  the full path to the directory which contains the upgrade scripts downloaded from the "bin" directory of this repository
+
+There are two separate scripts:
+
+* for Fusion 1.2 upgrades, you must run the Python script
+https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[download_upload_ds_pipelines.py] +
+This script rewrites Fusion datasource and pipeline configurations in order to encode any stored passwords
+needed for thos datasources.
+It uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
+If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
+
+* for Fusion 2.1 upgrades, you must run a Python program to rewrite Fusion datasource configurations automatically:
+https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/src[upgrade-ds-2.1-to-2.4.py]
+
+
+Upgrade Planning
+----------------
 
 * Disk space requirements: the INSTALL-DIR must be on a disk partition which has enough free space for the FUSION-NEW installation,
 which will be at least as large as FUSION-CURRENT.
 
 * File-system permissions: the user running the upgrade scripts and commands must have read/write/execute (rwx) permissions on directory FUSION-CURRENT.
 
-* Upgrade script requirements: the upgrade script is written in Python
-and uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
-If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
-
 * FUSION-CURRENT inventory.  Identify the following components needed for the current production system:
-** all collections
 
+** collections
+** datasources
 ** any JDBC drivers (if using JDBC datasources)
+** pipelines
+** scheduled jobs
+** crawl histories (if using datasources which store information in Fusion's `data/connectors/crawldb`)
 
 Validating Upgrade
 ------------------
