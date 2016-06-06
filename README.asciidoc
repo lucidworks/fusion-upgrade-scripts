@@ -23,7 +23,7 @@ https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[download_up
 which rewrites Fusion datasource and pipeline configurations in order to encode any stored passwords needed for those datasources.
 This script uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo],
 which are an HTTP request handler and ZooKeeper client, respectively.
-If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
+If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv]. +
 The `bin'` directory contains a Java utility to rewrite Fusion crawldb repositories:
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidworks.fusion-crawldb-migrator-0.1.0.jar]
 
