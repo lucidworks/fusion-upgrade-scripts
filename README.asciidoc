@@ -11,7 +11,7 @@ https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_F
 * To upgrade to Fusion 2.4.1 from all Fusion 2.1 and 2.2 versions, see:
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_Fusion/upgrade-1_2-to-2_1.html[Upgrade Fusion 1.2 to Fusion 2.1]
 
-== Upgrade scripts
+=== Upgrade scripts
 
 * The `src` directory is used to upgrade Fusion 2.1 to Fusion 2.4.
 It contains a Python program which rewrites Fusion datasource configurations automatically:
@@ -27,7 +27,7 @@ If for some reason, the user running the upgrade scripts doesn't have install pe
 The `bin'` directory contains a Java utility to rewrite Fusion crawldb repositories:
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidworks.fusion-crawldb-migrator-0.1.0.jar]
 
-== Reference filesets
+=== Reference filesets
 
 To facilitate the task of identifying changes made run scrips and their configuration files,
 the directory `reference-files` contains copies of the contents of these directories for all Fusion releases.
