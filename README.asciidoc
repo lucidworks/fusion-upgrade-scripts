@@ -5,10 +5,10 @@ This repository contains scripts and reference files used to upgrading a Fusion 
 The upgrade process is described in the Fusion online documentation:
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading-Fusion.html[Upgrading Fusion].
 
-* To upgrade to the latest Fusion 2.1 version from Fusion 1.2.3 and later, see
+* To upgrade to Fusion 2.4.1 from all Fusion 2.1 and 2.2 versions, see:
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_Fusion/upgrade-2_1-to-2_4.html[Upgrade Fusion 2.1 to Fusion 2.4]
 
-* To upgrade to Fusion 2.4.1 from all Fusion 2.1 and 2.2 versions, see:
+* To upgrade to the latest Fusion 2.1 version from Fusion 1.2.3 and later, see
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_Fusion/upgrade-1_2-to-2_1.html[Upgrade Fusion 1.2 to Fusion 2.1]
 
 === Upgrade scripts
