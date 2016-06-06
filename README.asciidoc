@@ -61,8 +61,7 @@ If for some reason, the user running the upgrade scripts doesn't have install pe
 
 * FUSION-CURRENT inventory.  Identify the following components needed for the current production system:
 ** all collections
-** all datasources, index and query pipelines, pipeline profiles
-** all Fusion users/roles
+
 ** any JDBC drivers (if using JDBC datasources)
 
 Validating Upgrade
