@@ -2,8 +2,6 @@
 
 This repository contains scripts and instructions for upgrading a Fusion deployment.
 
-The Fusion online documentation set contains upgrade information and instructions sets:
-
 * For a general discussion and overview of the upgrade process see:
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading-Fusion.html[Upgrading Fusion]
 
