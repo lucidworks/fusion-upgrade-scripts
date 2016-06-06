@@ -50,18 +50,17 @@ These instructions use the following names to refer to the directories involved 
 * FUSION-NEW:  name of the directory of the upgrade Fusion distribution during the upgrade process, e.g. "/opt/lucidworks/fusion-2.4.1".
 * INSTALL-DIR: the directory where the new Fusion version will be installed, e.g. "opt/lucidworks".
 All scripts and commands in the upgrade instruction set are carried out from this directory.
-* FUSION-UPGRADE-SCRIPTS:  the full path to the directory which contains the upgrade scripts downloaded from the "bin" directory of this repository
-
+* FUSION-UPGRADE-SCRIPTS:  the full path to the directory which contains the upgrade scripts downloaded from the "bin" directory of this repository.
 There are two separate scripts:
 
-* for Fusion 1.2 upgrades, you must run the Python script
+** for Fusion 1.2 upgrades, you must run the Python script
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[download_upload_ds_pipelines.py] +
 This script rewrites Fusion datasource and pipeline configurations in order to encode any stored passwords
-needed for thos datasources.
+needed for those datasources.
 It uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo], which are an HTTP request handler and ZooKeeper client, respectively.
 If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv].
 
-* for Fusion 2.1 upgrades, you must run a Python program to rewrite Fusion datasource configurations automatically:
+** for Fusion 2.1 upgrades, you must run a Python program to rewrite Fusion datasource configurations automatically:
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/src[upgrade-ds-2.1-to-2.4.py]
 
 
