@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Run the Fusion ZooKeeper Client
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+FUSION_SERVICE_NAME="Fusion ZooKeeper Client"
+
+LIB_DIR="$FUSION_HOME/apps/zookeeper/lib"
+
+set -e
+
+. "$FUSION_HOME/bin/common.sh"
+
+check_java
+JAVA_OPTIONS=("${API_JAVA_OPTIONS[@]}")
+extra_java_options
+
+cd "$FUSION_HOME"
+
+exec "$JAVA" -d64 \
+  "-Dapollo.home=$FUSION_HOME" \
+  -cp "$LIB_DIR/*" \
+  org.apache.zookeeper.ZooKeeperMain -server localhost:$ZOOKEEPER_PORT "$@"

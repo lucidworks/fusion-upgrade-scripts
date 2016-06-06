@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# Run the Spark master apps.
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=${FUSION_HOME:-`cd "${BIN}/.."; pwd`}
+export SPARK_HOME="${SPARK_HOME:-$FUSION_HOME/apps/spark-dist}"
+export APP_BASE="$FUSION_HOME/apps"
+export APP_HOME="${SPARK_MASTER_HOME:-${APP_BASE}/spark}"
+FUSION_SERVICE_NAME="Fusion Spark Master"
+VAR_DIR="$FUSION_HOME/var/spark-master"
+LOG_DIR="$FUSION_HOME/var/log/spark-master"
+PID_FILE="$VAR_DIR/spark-master.pid"
+
+PORT_NAME='spark-master'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${SPARK_MASTER_JAVA_OPTIONS[@]}")
+  extra_java_options
+
+  # common.sh will take care of checking if the agent is running but we still need to
+  # make sure the SparkMaster is not already running
+  MASTER_PID=`ps auxww | grep SparkMaster | grep -v grep | grep -v GradleWrapperMain | awk '{print $2}' | sort -r | tr -d ' '`
+  if [ -n "$MASTER_PID" ]; then
+    output "ERROR: spark-master process is already running (PID: $MASTER_PID). Please kill process $MASTER_PID and restart using: $FUSION_HOME/bin/spark-master start"
+    return
+  fi
+
+  AGENT_PID=`ps auxww | grep SparkAgent | grep spark-master | grep -v grep | awk '{print $2}' | sort -r | tr -d ' '`
+  if [ -n "$AGENT_PID" ]; then
+    output "ERROR: Agent for spark-master process is already running (PID: $AGENT_PID). Please stop process $AGENT_PID and restart using: $FUSION_HOME/bin/spark-master start"
+    return
+  fi
+
+  cd "$APP_HOME"
+  mkdir -p "$LOG_DIR"
+
+  report_port
+  write_pid_file
+
+  declare -a QUOTED_JAVA_OPTIONS
+  for i in "${JAVA_OPTIONS[@]}"
+  do
+    QUOTED_JAVA_OPTIONS+=("'$i'")
+  done
+
+  export SPARK_MASTER_OPTS="${QUOTED_JAVA_OPTIONS[@]} \
+    -DSPARK_MASTER \
+    -Dcurator.zk.connect='$FUSION_ZK' \
+    -Dcom.lucidworks.apollo.solr.zk.connect='$FUSION_SOLR_ZK' \
+    -Dlog4j.configurationFile=file:'$FUSION_HOME'/apps/spark/conf/spark-master-log4j2.xml \
+    -Dfusion.spark.master.port='$SPARK_MASTER_PORT' \
+    -Dfusion.spark.master.webui.port='$SPARK_MASTER_UI_PORT' \
+    -Dapollo.home='$FUSION_HOME' \
+    -Dspark.local.dir='$FUSION_HOME'/var/spark-master/ \
+    -Dspark.io.tmpdir='$FUSION_HOME'/var/spark-master/ \
+    -Dspark.home='$SPARK_HOME'"
+
+  if [ -z "$FUSION_NO_AGENT" ]; then
+    set -x
+    exec ${JAVA} -classpath "${APP_HOME}/lib/*" com.lucidworks.spark.SparkAgent "$APP_HOME/bin/spark-master" "$@"
+  else
+    set -x
+    exec ${APP_HOME}/bin/spark-master $@
+  fi
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

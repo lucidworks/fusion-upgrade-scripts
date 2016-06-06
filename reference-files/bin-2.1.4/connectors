@@ -1,0 +1,61 @@
+#!/bin/bash
+#
+# Run the connectors web app in Jetty
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+export JETTY_HOME="$FUSION_HOME/apps/jetty/home"
+export JETTY_BASE="$FUSION_HOME/apps/jetty/connectors"
+FUSION_SERVICE_NAME="Fusion Connectors"
+VAR_DIR="$FUSION_HOME/var/connectors"
+LOG_DIR="$FUSION_HOME/var/log/connectors"
+PID_FILE="$VAR_DIR/connectors.pid"
+
+PORT_NAME='connectors'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${CONNECTORS_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  mkdir -p "$FUSION_HOME/data/connectors" "$LOG_DIR"
+  cd "$FUSION_HOME/apps/connectors"
+
+  report_port
+  write_pid_file
+
+  set -x
+  exec "$JAVA" -d64 \
+    -DCONNECTORS \
+    "${JAVA_OPTIONS[@]}" \
+    -cp "$FUSION_HOME/apps/connectors/conf" \
+    "-Djava.io.tmpdir=$VAR_DIR/work" \
+    "-Dapollo.connectors.app=$FUSION_HOME/apps/connectors" \
+    "-Dapollo.connectors.conf=$FUSION_HOME/apps/connectors/conf" \
+    "-Dapollo.connectors.data=$FUSION_HOME/data/connectors" \
+    "-Dapollo.connectors.logs=$FUSION_HOME/var/log/connectors" \
+    "-Dcurator.zk.connect=$FUSION_ZK" \
+    "-Dcom.lucidworks.apollo.solr.zk.connect=$FUSION_SOLR_ZK" \
+    "-Dcom.lucidworks.apollo.app.port=$HTTP_PORT" \
+    "-Dlog4j.configurationFile=file:$JETTY_BASE/resources/log4j2.xml" \
+    "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager" \
+    "-Dlib=$JETTY_HOME/lib" \
+    "-Dapollo.home=$FUSION_HOME" \
+    "-XX:OnOutOfMemoryError=$FUSION_HOME/bin/oom.sh connectors" \
+    "-DisThreadContextMapInheritable=true" \
+    -jar "$JETTY_HOME/start.jar" \
+    "jetty.home=$JETTY_HOME" \
+    "jetty.base=$JETTY_BASE" \
+    "jetty.port=$HTTP_PORT" \
+    "STOP.PORT=$STOP_PORT" \
+    "STOP.KEY=$STOP_KEY" \
+    "$JETTY_BASE/etc/jetty-logging.xml"
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

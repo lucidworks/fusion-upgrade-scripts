@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# Run the Fusion UI web app in Jetty
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+export JETTY_HOME="$FUSION_HOME/apps/jetty/home"
+export JETTY_BASE="$FUSION_HOME/apps/jetty/ui"
+FUSION_SERVICE_NAME="Fusion UI"
+VAR_DIR="$FUSION_HOME/var/ui"
+LOG_DIR="$FUSION_HOME/var/log/ui"
+PID_FILE="$VAR_DIR/ui.pid"
+
+PORT_NAME='ui'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${UI_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  cd "$JETTY_BASE"
+
+  report_port
+  write_pid_file
+
+  output "Running $FUSION_SERVICE_NAME"
+
+  set -x
+  exec "$JAVA" -d64 \
+    -DPROXY \
+    "${JAVA_OPTIONS[@]}" \
+    "-Djava.io.tmpdir=$VAR_DIR/work" \
+    "-Dlog4j.configurationFile=file:$JETTY_BASE/resources/log4j2.xml" \
+    "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager" \
+    "-Dapollo.home=$FUSION_HOME" \
+    "-Dcom.lucidworks.apollo.admin.zk.connect=$FUSION_ZK" \
+    "-XX:OnOutOfMemoryError=$FUSION_HOME/bin/oom.sh ui" \
+    "-Dcom.lucidworks.apollo.admin.cors.allow.origin=${FUSION_CORS_ALLOW_ORIGIN:-^\$}" \
+    -jar "$JETTY_HOME/start.jar" \
+    "jetty.home=$JETTY_HOME" \
+    "jetty.base=$JETTY_BASE" \
+    "jetty.port=$HTTP_PORT" \
+    "STOP.PORT=$STOP_PORT" \
+    "STOP.KEY=$STOP_KEY" \
+    "$JETTY_BASE/etc/jetty-logging.xml"
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

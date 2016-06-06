@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Run the Fusion ZooKeeper
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+FUSION_SERVICE_NAME="Fusion ZooKeeper"
+VAR_DIR="$FUSION_HOME/var/zookeeper"
+LOG_DIR="$FUSION_HOME/var/log/zookeeper"
+CONF_DIR="$FUSION_HOME/conf/zookeeper"
+
+LIB_DIR="$FUSION_HOME/apps/zookeeper/lib"
+PID_FILE="$VAR_DIR/zookeeper.pid"
+
+PORT_NAME='zookeeper'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${API_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  cd "$FUSION_HOME"
+
+  mkdir -p "$LOG_DIR"
+
+  report_port
+  write_pid_file
+
+  set -x
+  exec "$JAVA" -d64 \
+    "-Dapollo.home=$FUSION_HOME" \
+    "-Dlog4j.configurationFile=file:$CONF_DIR/log4j2.xml" \
+    -cp "$LIB_DIR/*" \
+    "-XX:OnOutOfMemoryError=$FUSION_HOME/bin/oom.sh zookeeper" \
+    org.apache.zookeeper.server.quorum.QuorumPeerMain "$CONF_DIR/zoo.cfg"
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

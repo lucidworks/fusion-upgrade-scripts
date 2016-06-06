@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# Run the Spark worker apps.
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=${FUSION_HOME:-`cd "${BIN}/.."; pwd`}
+export SPARK_HOME="${SPARK_HOME:-$FUSION_HOME/apps/spark-dist}"
+export APP_BASE="$FUSION_HOME/apps"
+export APP_HOME="${SPARK_WORKER_HOME:-${APP_BASE}/spark}"
+FUSION_SERVICE_NAME="Fusion Spark Worker"
+export SPARK_WORKER_DIR=$FUSION_HOME/var/spark-worker/
+VAR_DIR="$FUSION_HOME/var/spark-worker"
+LOG_DIR="$FUSION_HOME/var/log/spark-worker"
+PID_FILE="$VAR_DIR/spark-worker.pid"
+
+PORT_NAME='spark-worker'
+
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${SPARK_WORKER_JAVA_OPTIONS[@]}")
+  extra_java_options
+
+  # common.sh will take care of checking if the agent is running but we still need to
+  # make sure the SparkWorker is not already running
+  WORKER_PID=`ps auxww | grep SparkWorker | grep -v grep | grep -v GradleWrapperMain | awk '{print $2}' | sort -r | tr -d ' '`
+  if [ -n "$WORKER_PID" ]; then
+    output "ERROR: spark-worker process is already running (PID: $WORKER_PID). Please kill process $WORKER_PID and restart using: $FUSION_HOME/bin/spark-worker start"
+    return
+  fi
+
+  AGENT_PID=`ps auxww | grep SparkAgent | grep spark-worker | grep -v grep | awk '{print $2}' | sort -r | tr -d ' '`
+  if [ -n "$AGENT_PID" ]; then
+    output "ERROR: Agent for spark-worker process is already running (PID: $AGENT_PID). Please stop process $AGENT_PID and restart using: $FUSION_HOME/bin/spark-worker start"
+    return
+  fi
+
+  cd "$APP_HOME"
+  mkdir -p "$LOG_DIR"
+
+  report_port
+  write_pid_file
+
+  declare -a QUOTED_JAVA_OPTIONS
+  for i in "${JAVA_OPTIONS[@]}"
+  do
+    QUOTED_JAVA_OPTIONS+=("'$i'")
+  done
+
+  export SPARK_WORKER_OPTS="${QUOTED_JAVA_OPTIONS[@]} \
+    -DSPARK_WORKER \
+    -Dcurator.zk.connect='$FUSION_ZK' \
+    -Dcom.lucidworks.apollo.solr.zk.connect='$FUSION_SOLR_ZK' \
+    -Dlog4j.configurationFile=file:'$FUSION_HOME'/apps/spark/conf/spark-worker-log4j2.xml \
+    -Dspark.worker.port='$SPARK_WORKER_PORT' \
+    -Dspark.worker.webui.port='$SPARK_WORKER_UI_PORT' \
+    -Dapollo.home='$FUSION_HOME' \
+    -Dspark.local.dir='$FUSION_HOME'/var/spark-worker/ \
+    -Dspark.io.tmpdir='$FUSION_HOME'/var/spark-worker/ \
+    -Dspark.home='$SPARK_HOME'"
+
+  if [ -z "$FUSION_NO_AGENT" ]; then
+    set -x
+    exec ${JAVA} -classpath "${APP_HOME}/lib/*" com.lucidworks.spark.SparkAgent "$APP_HOME/bin/spark-worker" "$@"
+  else
+    set -x
+    exec ${APP_HOME}/bin/spark-worker $@
+  fi
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"

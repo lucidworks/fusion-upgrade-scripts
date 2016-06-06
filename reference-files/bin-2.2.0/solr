@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Run the solr web app in Jetty
+
+BIN=`dirname "${BASH_SOURCE-$0}"`
+SCRIPT=`basename "${BASH_SOURCE-$0}"`
+export FUSION_HOME=`cd "${BIN}/.."; pwd`
+export JETTY_HOME="$FUSION_HOME/apps/jetty/home"
+export JETTY_BASE="$FUSION_HOME/apps/jetty/solr"
+FUSION_SERVICE_NAME="Fusion Solr"
+VAR_DIR="$FUSION_HOME/var/solr"
+LOG_DIR="$FUSION_HOME/var/log/solr"
+PID_FILE="$VAR_DIR/solr.pid"
+
+PORT_NAME='solr'
+
+set -e
+
+function do_run() {
+  check_java
+  JAVA_OPTIONS=("${SOLR_JAVA_OPTIONS[@]}")
+  extra_java_options
+  #printf 'JAVA_OPTION: %s\n' "${JAVA_OPTIONS[@]}"
+
+  report_port
+  write_pid_file
+
+  # solr-base/start.d/http.ini makes solr listen on port 8983
+  # and zookeeper on 8983+1000=9983. We pass zkHost
+  # for the ZooKeeper client.
+  set -x
+
+  exec "$JAVA" -d64 \
+    "-DSOLR" \
+    "${JAVA_OPTIONS[@]}" \
+    "-Djava.io.tmpdir=$VAR_DIR/work" \
+    "-Dlog4j.configurationFile=file:$JETTY_BASE/resources/log4j2.xml" \
+    "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager" \
+    "-Dlib=$JETTY_HOME/lib" \
+    -Djetty.port=$HTTP_PORT \
+    -DzkHost=$FUSION_SOLR_ZK \
+    "-Dsolr.solr.home=data/solr" \
+    "-Dsolr.install.dir=$FUSION_HOME/apps/solr-dist" \
+    "-Dapollo.home=$FUSION_HOME" \
+    "-XX:OnOutOfMemoryError=$FUSION_HOME/bin/oom.sh solr" \
+    -jar "$JETTY_HOME/start.jar" \
+    "jetty.home=$JETTY_HOME" \
+    "jetty.base=$JETTY_BASE" \
+    "jetty.port=$HTTP_PORT" \
+    "STOP.PORT=$STOP_PORT" \
+    "STOP.KEY=$STOP_KEY" \
+    "$JETTY_BASE/etc/jetty-logging.xml" </dev/null
+}
+
+. "$FUSION_HOME/bin/common.sh"
+
+main "$@"
