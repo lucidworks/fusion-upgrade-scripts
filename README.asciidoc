@@ -4,7 +4,7 @@ Instruction Sets
 [width="100%",cols="2a,2a,5a",options="header",]
 |===============================================================================================================================
 |CURRENT |NEW |Instruction Set
-|2.1.0 through 2.2.0 |latest 2.4 |link:upgrade-to-2_1.asciidoc[upgrade from 2.1 to latest 2.1]
+|2.1.0 through 2.2.0 |latest 2.4 |link:upgrade-to-2_4.asciidoc[upgrade from 2.1 to latest 2.4]
 |1.2.3 through 2.0.0 |latest 2.1 |link:upgrade-to-2_1.asciidoc[upgrade from 1.2 to latest 2.1]
 |===============================================================================================================================
 
