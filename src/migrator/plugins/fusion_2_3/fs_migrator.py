@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
-from src.migrator.plugins.fusion_2_3.common_migrator import SimpleSecurityTrimmingMigrator
-
 from src.utils.constants import *
 
-class SmbMigrator(SimpleSecurityTrimmingMigrator):
+class SmbMigrator():
 
   def migrate(self, data_source):
-    properties = dict(data_source[PROPERTIES])
+    properties = data_source[PROPERTIES]
     ad_url = properties.pop(AD_URL, DEFAULT_EMPTY)
     ad_principal = properties.pop(AD_PRINCIPAL, DEFAULT_EMPTY)
     ad_credentials = properties.pop(AD_CREDENTIALS, DEFAULT_EMPTY)
@@ -25,10 +23,13 @@ class SmbMigrator(SimpleSecurityTrimmingMigrator):
     ad_referral = properties.pop(AD_REFERRAL, FOLLOW)
     ad_read_timeout = properties.pop(AD_READ_TIMEOUT, 5000)
     ad_connect_timeout = properties.pop(AD_CONNECT_TIMEOUT, 3000)
-    data_source = SimpleSecurityTrimmingMigrator.migrate(self, data_source)
-    security_trimming = properties.get(ENABLE_SECURITY_TRIMMING)
+    security_trimming = properties.pop(ENABLE_SECURITY_TRIMMING, False)
 
-    if (isinstance(security_trimming, dict) and len(security_trimming) > 0) or (security_trimming is None):
+    if isinstance(security_trimming, bool) and not security_trimming:
+      return data_source
+
+    if isinstance(security_trimming, dict):
+      properties[ENABLE_SECURITY_TRIMMING] = security_trimming
       return data_source
 
     security_trimming = {}
@@ -49,8 +50,6 @@ class SmbMigrator(SimpleSecurityTrimmingMigrator):
     security_trimming[AD_REFERRAL] = ad_referral
     security_trimming[AD_READ_TIMEOUT] = ad_read_timeout
     security_trimming[AD_CONNECT_TIMEOUT] = ad_connect_timeout
-
     properties[ENABLE_SECURITY_TRIMMING] = security_trimming
-    data_source[PROPERTIES] = properties
 
     return data_source
