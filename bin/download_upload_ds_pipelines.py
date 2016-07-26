@@ -3,7 +3,7 @@ import argparse
 import datetime
 import json
 import os
-
+import getpass
 from kazoo.client import KazooClient
 import requests
 
@@ -12,7 +12,6 @@ parser.add_argument("--zk-connect", required=True, help="ZooKeeper connect strin
 parser.add_argument("--action", required=True, help="Action to be performed (download, upload)")
 parser.add_argument("--fusion-url", default="http://localhost:8764/api/apollo", help="URL of the Fusion proxy server")
 parser.add_argument("--fusion-username", default="admin", help="Username to use when authenticating to the Fusion application (should be an admin)")
-parser.add_argument("--fusion-password", default="password123", help="Password for the given Fusion user")
 
 def fusion_session(url, username, password):
     headers = {"Content-type": "application/json"}
@@ -133,8 +132,8 @@ if __name__ == "__main__":
         download_data(ws_name)
     elif action == "upload":
         # Start a new Fusion session
-        session = fusion_session(args.fusion_url, args.fusion_username, args.fusion_password)
+        password = getpass.getpass('Enter Password:')
+        session = fusion_session(args.fusion_url, args.fusion_username, password )
 
         print("Uploading pipelines, stages and datasource payloads")
         upload_data(ws_name, session)
-
