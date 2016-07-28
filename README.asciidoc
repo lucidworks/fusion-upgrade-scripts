@@ -21,14 +21,26 @@ https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/src[upgrade-ds-
 It contains two utilities:
 
 ** Python script 
+which rewrites Fusion datasource and pipeline configurations in order to encode any stored passwords needed for those datasources:
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[download_upload_ds_pipelines.py]
-which rewrites Fusion datasource and pipeline configurations in order to encode any stored passwords needed for those datasources.
-This script uses packages http://docs.python-requests.org/en/latest/user/install/#install[requests] and https://kazoo.readthedocs.org/en/latest/install.html[kazoo],
-which are an HTTP request handler and ZooKeeper client, respectively.
-If for some reason, the user running the upgrade scripts doesn't have install permissions, use Python's http://docs.python-guide.org/en/latest/dev/virtualenvs/[virtualenv]. +
 
 ** Java program which rewrites pre-2.1 Fusion crawldb files to the data format introduced in Fusion 2.1:
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidworks.fusion-crawldb-migrator-0.1.0.jar]
+
+==== Python dependencies
+
+The python scripts run under Python 2.7. They have been tested with version 2.7.10.
+If this version of Python isn't available, you should use Python's
+https://virtualenv.pypa.io/en/stable/[virtualenv].
+
+All upgrade scripts uses the python package https://kazoo.readthedocs.org/en/latest/install.html[kazoo]
+which is a ZooKeeper client.
+The script 'download_upload_ds_pipelines.py' also uses package
+http://docs.python-requests.org/en/latest/user/install/#install[requests] which is an HTTP request handler.
+
+If you don't have permissions to install packages, you can use python to install virtualenv and then
+from your virtualenv python environment, you can install your own versions of theses packages.
+For an example recipe, see this blog post: https://opensourcehacker.com/2012/09/16/recommended-way-for-sudo-free-installation-of-python-software-with-virtualenv/[sudo-free installation of Python software ].
 
 === Reference filesets
 

@@ -1,0 +1,14 @@
+== Python version and packages
+
+The script which runs this utility is "upgrade-ds-2.1-to-2.4.py".
+It requires Python version 2.7 and has only been tested in Python 2.7.10.
+If this version of Python isn't available, you should use Python's
+https://virtualenv.pypa.io/en/stable/[virtualenv].
+
+This script uses the following python packages:
+
+* https://kazoo.readthedocs.org/en/latest/install.html[kazoo] - a ZooKeeper client.
+
+If you don't have permissions to install packages, you can use python to install virtualenv and then
+from your virtualenv python environment, you can install your own versions of theses packages.
+For an example recipe, see this blog post: https://opensourcehacker.com/2012/09/16/recommended-way-for-sudo-free-installation-of-python-software-with-virtualenv/[sudo-free installation of Python software ].
