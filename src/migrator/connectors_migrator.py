@@ -19,6 +19,7 @@ class ConnectorsMigrator:
     self.zk_fusion_host = VariablesHelper.get_fusion_zookeeper_host()
     self.zk_fusion_node = VariablesHelper.get_fusion_zookeeper_node()
     self.fusion_version = self.cleanup_fusion_version(VariablesHelper.get_fusion_version())
+    self.old_fusion_version = self.cleanup_fusion_version(VariablesHelper.get_old_fusion_version())
     self.zookeeper_client = ZookeeperClient(self.zk_fusion_host)
 
   def cleanup_fusion_version(self, version):
@@ -50,33 +51,39 @@ class ConnectorsMigrator:
           return
 
     for child in children:
-      data_source_node = "{}/{}".format(zk_datasources_node, child);
+      data_source_node = "{}/{}".format(zk_datasources_node, child)
       data_source = self.zookeeper_client.get_as_json(data_source_node)
       ds_type = data_source["type"]
 
       logging.info("Trying to migrate datasource: %s, type: %s", child, ds_type)
 
+      ds_version = self.old_fusion_version
       ds_migrators = migrators_file.get(ds_type, None)
       if ds_migrators and isinstance(ds_migrators, list):
         classname = None
-        for ds_migrator in ds_migrators:
-          # Match the migrator based on the current version
+        for counter, ds_migrator in enumerate(ds_migrators):
+          classname = None
+          # Match the migrator based on the current and old version
           migrator_clz = ds_migrator["migrator"]
           base_version = ds_migrator["base_version"]
           target_version = ds_migrator["target_version"]
-          if StrictVersion(base_version) < StrictVersion(self.fusion_version) <= StrictVersion(target_version):
+          if StrictVersion(base_version) <= StrictVersion(ds_version) <= StrictVersion(target_version):
             classname = migrator_clz
-        if classname is None:
-          logging.info("No classname found for fusion version {} and datasource type {}".format(self.fusion_version, ds_type))
-          continue
-        migrator = self.class_loader.get_instance(classname)
-        # Start the migration
-        if migrator is None:
-          logging.error("Migrator '{}' does not exist or the classname is malformed".format(classname))
-          continue
-        logging.info("Executing {}.migrate(data_source)".format(classname))
-        updated_datasource = migrator.migrate(data_source)
-        self.zookeeper_client.set_as_json(data_source_node, updated_datasource)
-      else:
-        logging.error("Migrator does not exist for type '{}'".format(ds_type))
-        continue
+            if classname is None:
+              logging.info("No classname found for datasource type '{}' between version {} and new version {}".format(ds_type, ds_version, self.fusion_version))
+              continue
+            migrator = self.class_loader.get_instance(classname)
+            # Start the migration
+            if migrator is None:
+              logging.error("Migrator '{}' does not exist or the classname is malformed".format(classname))
+              continue
+            logging.info("Executing {}.migrate(data_source)".format(classname))
+            updated_datasource = migrator.migrate(data_source)
+            ds_version = target_version
+            # Only updated in ZK when it's the last migrator
+            if counter == len(ds_migrators) - 1:
+              print counter, len(ds_migrators)
+              self.zookeeper_client.set_as_json(data_source_node, updated_datasource)
+          else:
+            logging.info("No migrator found for version '{}' and new version '{}' for type".format(ds_version, self.fusion_version, ds_type))
+            continue

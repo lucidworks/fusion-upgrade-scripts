@@ -57,3 +57,6 @@ TRACK_EMBEDDED_IDS = "trackEmbeddedIDs"
 ALIAS_EXPIRATION = "aliasExpiration"
 FETCH_DELAY_MS_PER_HOST = "fetchDelayMSPerHost"
 LEGAL_URI_SCHEMES_PROP = "legalURISchemes"
+
+# Salesforce 1.2.x properties
+SALESFORCE_FILESYSTEM_PROPERTIES_PREFIX = "properties.f.fs"

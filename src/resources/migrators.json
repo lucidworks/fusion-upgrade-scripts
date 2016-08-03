@@ -29,7 +29,13 @@
     "base_version": "2.1.0",
     "target_version": "2.4.1"
   }],
-  "sharepoint": [{
+  "sharepoint": [
+    {
+      "migrator": "src.migrator.plugins.fusion_2_0.salesforce_migrator.SharepointMigrator",
+      "base_version": "1.2.3",
+      "target_version": "2.1.0"
+    },
+    {
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.SharepointMigrator",
     "base_version": "2.1.0",
     "target_version": "2.4.1"
