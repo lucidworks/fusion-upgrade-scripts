@@ -10,6 +10,7 @@ app_path = os.path.join(current_dir, "../")
 sys.path.append(app_path)
 
 from src.migrator.connectors_migrator import ConnectorsMigrator
+from src.migrator.nlp_pipelines_migrator import PipelinesNLPMigrator
 from src.utils.variables_helper import VariablesHelper
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(filename)s:%(lineno)d - %(levelname)s - %(message)s")
@@ -28,3 +29,6 @@ if __name__ == "__main__":
 
   connectors_migrator = ConnectorsMigrator()
   connectors_migrator.start(data_sources_to_migrate)
+
+  pipelines_migrator = PipelinesNLPMigrator()
+  pipelines_migrator.migrate_indexpipelines()
