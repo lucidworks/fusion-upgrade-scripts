@@ -4,6 +4,7 @@ import os
 class VariablesHelper:
 
   FUSION_HOME = None
+  FUSION_OLD_HOME = None
   FUSION_ZK = "FUSION_ZK"
 
   @staticmethod
@@ -14,6 +15,16 @@ class VariablesHelper:
     if VariablesHelper.FUSION_HOME is None:
       return False
     return True
+
+  @staticmethod
+  def ensure_old_fusion_home():
+
+    VariablesHelper.FUSION_OLD_HOME = os.environ.get("FUSION_OLD_HOME")
+
+    if VariablesHelper.FUSION_OLD_HOME is None:
+      return False
+    return True
+
 
   @staticmethod
   def get_variable(path, variable):
@@ -34,6 +45,11 @@ class VariablesHelper:
   @staticmethod
   def get_fusion_version():
     path = "{}/fusion.build".format(VariablesHelper.FUSION_HOME)
+    return VariablesHelper.get_variable(path, "fusion.version")
+
+  @staticmethod
+  def get_old_fusion_version():
+    path = "{}/fusion.build".format(VariablesHelper.FUSION_OLD_HOME)
     return VariablesHelper.get_variable(path, "fusion.version")
 
   @staticmethod

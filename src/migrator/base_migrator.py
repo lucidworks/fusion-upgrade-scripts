@@ -9,6 +9,6 @@ class BaseMigrator:
       try:
         del data_source[PROPERTIES][property]
       except:
-        logging.error("Could not delete property: %s", property)
+        logging.warn("Could not delete property: %s", property)
         continue
     return data_source
