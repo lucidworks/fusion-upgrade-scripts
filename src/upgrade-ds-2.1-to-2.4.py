@@ -27,6 +27,10 @@ if __name__ == "__main__":
     logging.info("FUSION_HOME variable was not set")
     exit()
 
+  if not VariablesHelper.ensure_old_fusion_home():
+    logging.info("FUSION_OLD_HOME variable is not set")
+    exit()
+
   connectors_migrator = ConnectorsMigrator()
   connectors_migrator.start(data_sources_to_migrate)
 
