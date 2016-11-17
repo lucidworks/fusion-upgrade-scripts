@@ -2,32 +2,32 @@
   "alfresco": [{
     "migrator": "src.migrator.plugins.fusion_2_3.common_migrator.SimpleSecurityTrimmingMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "file": [{
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.BasicAndaMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "github": [{
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.GitHubMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "javascript": [{
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.JavascriptMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "jira": [{
     "migrator": "src.migrator.plugins.fusion_2_3.common_migrator.SimpleSecurityTrimmingMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "salesforce": [{
     "migrator": "src.migrator.plugins.fusion_2_3.salesforce_migrator.SalesforceMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "sharepoint": [
     {
@@ -38,16 +38,16 @@
     {
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.SharepointMigrator",
     "base_version": "2.1.0",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "smb": [{
     "migrator": "src.migrator.plugins.fusion_2_3.fs_migrator.SmbMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }],
   "web": [{
     "migrator": "src.migrator.plugins.fusion_2_3.anda_migrator.BasicAndaMigrator",
     "base_version": "1.2.3",
-    "target_version": "2.4.1"
+    "target_version": "2.4.3"
   }]
 }
