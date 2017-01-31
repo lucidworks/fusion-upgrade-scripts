@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import copy
+import json
 
 from src.utils.class_loader import ClassLoader
 from src.utils.zookeeper_client import ZookeeperClient
@@ -8,10 +9,13 @@ from src.utils.variables_helper import VariablesHelper
 
 import logging
 
-INDEXPIPELINES_ZPATH = "lucid/index-pipelines"
+
 OPENNLP_TYPE = "nlp-extractor"
 LOOKUP_TYPE = "lookup-extractor"
 
+"""
+    Should be used to upgrade from 2.1.x to 2.4.x
+"""
 class PipelinesNLPMigrator:
 
     def __init__(self):
@@ -21,6 +25,7 @@ class PipelinesNLPMigrator:
         self.zookeeper_client = ZookeeperClient(self.zk_fusion_host)
 
     def migrate_indexpipelines(self):
+        INDEXPIPELINES_ZPATH = "lucid/index-pipelines"
         # Get all the index pipelines
         zk_pipelines_node = "{}/{}".format(self.zk_fusion_node, INDEXPIPELINES_ZPATH)
         self.zookeeper_client.start()
@@ -65,4 +70,32 @@ def fix_pipeline_extractor_stages(pipeline):
                                 del rules[index]["entityTypes"][index1]["definitions"]
     return updated
 
+"""
+    Use this class to upgrade from 2.1.x to 3.0.x
+"""
+class PipelinesNLPMigrator3x:
 
+    def __init__(self, config, zk):
+        self.class_loader = ClassLoader()
+        self.zk_fusion_host = config["fusion.zk.connect"]
+        self.zk_fusion_node = config["api.namespace"]
+        self.zookeeper_client = zk
+
+    def migrate_indexpipelines(self):
+        INDEXPIPELINES_ZPATH = "index-pipelines"
+        # Get all the index pipelines
+        zk_pipelines_node = "{}/{}".format(self.zk_fusion_node, INDEXPIPELINES_ZPATH)
+
+        if not self.zookeeper_client.exists(zk_pipelines_node):
+            return
+
+        children = self.zookeeper_client.get_children(zk_pipelines_node)
+        for child in children:
+            pipeline_node = "{}/{}".format(zk_pipelines_node, child)
+            value, zstat = self.zookeeper_client.get(pipeline_node)
+            pipeline = json.loads(value)
+
+            is_pipeline_updated = fix_pipeline_extractor_stages(pipeline)
+            if is_pipeline_updated:
+                logging.info("Updating pipeline '{}'".format(pipeline.get("id")))
+                self.zookeeper_client.set_as_json(pipeline_node, pipeline)

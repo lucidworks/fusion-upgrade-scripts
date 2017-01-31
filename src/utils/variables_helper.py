@@ -1,7 +1,13 @@
 import re
 import os
+import logging
+import sys
+import platform
 
 class VariablesHelper:
+
+  def __init__(self):
+    pass
 
   FUSION_HOME = None
   FUSION_OLD_HOME = None
@@ -11,7 +17,8 @@ class VariablesHelper:
   def ensure_fusion_home():
 
     VariablesHelper.FUSION_HOME = os.environ.get("FUSION_HOME")
-
+    if VariablesHelper.FUSION_HOME is not None and VariablesHelper.is_windows():
+      VariablesHelper.FUSION_HOME = VariablesHelper.FUSION_HOME.lstrip("\"").rstrip("\"")
     if VariablesHelper.FUSION_HOME is None:
       return False
     return True
@@ -20,6 +27,8 @@ class VariablesHelper:
   def ensure_old_fusion_home():
 
     VariablesHelper.FUSION_OLD_HOME = os.environ.get("FUSION_OLD_HOME")
+    if VariablesHelper.FUSION_OLD_HOME is not None and VariablesHelper.is_windows():
+      VariablesHelper.FUSION_OLD_HOME = VariablesHelper.FUSION_OLD_HOME.lstrip("\"").rstrip("\"")
 
     if VariablesHelper.FUSION_OLD_HOME is None:
       return False
@@ -39,27 +48,45 @@ class VariablesHelper:
 
   @staticmethod
   def get_fusion_variable(variable):
-    path = "{}/conf/config.sh".format(VariablesHelper.FUSION_HOME)
+    if (VariablesHelper.is_windows()):
+      path = os.path.join(VariablesHelper.FUSION_HOME, "conf", "config.cmd")
+    else:
+      path = os.path.join(VariablesHelper.FUSION_HOME, "conf", "config.sh")
     return VariablesHelper.get_variable(path, variable)
 
   @staticmethod
   def get_fusion_version():
-    path = "{}/fusion.build".format(VariablesHelper.FUSION_HOME)
-    return VariablesHelper.get_variable(path, "fusion.version")
+    path = os.path.join(VariablesHelper.FUSION_HOME, "fusion.build")
+    return VariablesHelper.cleanup_fusion_version(VariablesHelper.get_variable(path, "fusion.version"))
 
   @staticmethod
   def get_old_fusion_version():
-    path = "{}/fusion.build".format(VariablesHelper.FUSION_OLD_HOME)
-    return VariablesHelper.get_variable(path, "fusion.version")
+    path = os.path.join(VariablesHelper.FUSION_OLD_HOME, "fusion.build")
+    return VariablesHelper.cleanup_fusion_version(VariablesHelper.get_variable(path, "fusion.version"))
 
   @staticmethod
   def get_fusion_zookeeper_host():
-    zk_emsenble = VariablesHelper.get_fusion_variable(VariablesHelper.FUSION_ZK)
-    result = zk_emsenble.split("/")
+    zk_ensemble = VariablesHelper.get_fusion_variable(VariablesHelper.FUSION_ZK)
+    result = zk_ensemble.split("/")
     return result[0]
 
   @staticmethod
   def get_fusion_zookeeper_node():
-    zk_emsenble = VariablesHelper.get_fusion_variable(VariablesHelper.FUSION_ZK)
-    result = zk_emsenble.split("/")
+    zk_ensemble = VariablesHelper.get_fusion_variable(VariablesHelper.FUSION_ZK)
+    result = zk_ensemble.split("/")
     return "" if len(result) <= 1 else "/{}".format(result[1])
+
+  @staticmethod
+  def cleanup_fusion_version(version):
+    # Remove SNAPSHOT or RC numbers from the version if present
+    m = re.search('\d+\.\d+\.\d+', version)
+    if m is not None:
+      return m.group(0)
+    else:
+      logging.error("Could not extract a valid version number from '{}'".format(version))
+      sys.exit(1)
+     
+  @staticmethod
+  def is_windows():
+    system_name = platform.system()
+    return "Windows" in system_name or "Microsoft" in system_name

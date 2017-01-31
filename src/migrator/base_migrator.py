@@ -7,7 +7,9 @@ class BaseMigrator:
   def delete_properties(self, data_source, properties):
     for property in properties:
       try:
-        del data_source[PROPERTIES][property]
+        if PROPERTIES in data_source:
+          if property in data_source[PROPERTIES]:
+            del data_source[PROPERTIES][property]
       except:
         logging.warn("Could not delete property: %s", property)
         continue

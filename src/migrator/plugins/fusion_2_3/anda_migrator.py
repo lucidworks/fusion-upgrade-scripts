@@ -47,6 +47,7 @@ class GitHubMigrator(BaseMigrator):
                                                   ALIAS_EXPIRATION,
                                                   FETCH_DELAY_MS_PER_HOST, LEGAL_URI_SCHEMES_PROP,
                                                   ENABLE_SECURITY_TRIMMING])
+    data_source[PROPERTIES].pop(F_GITHUB_TYPE, DEFAULT_EMPTY)
     return data_source
 
 class JavascriptMigrator(BaseMigrator):

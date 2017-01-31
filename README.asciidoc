@@ -3,7 +3,13 @@
 This repository contains scripts and reference files used to upgrading a Fusion deployment.
 
 The upgrade process is described in the Fusion online documentation:
-https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading-Fusion.html[Upgrading Fusion].
+
+
+* To upgrade to Fusion 3.0, see:
+https://doc.lucidworks.com/fusion/3.0/Installation_and_Configuration/Upgrading-Fusion.html[Upgrading Fusion (3.0)].
+
+* To upgrade from 2.4.x versions to 2.4.4, see:
+https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading-Fusion.html[Upgrading Fusion (2.4)].
 
 * To upgrade to Fusion 2.4.1 from all Fusion 2.1 and 2.2 versions, see:
 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_Fusion/upgrade-2_1-to-2_4.html[Upgrade Fusion 2.1 to Fusion 2.4]
@@ -13,11 +19,13 @@ https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_F
 
 === Upgrade scripts
 
-* The `src` directory is used to upgrade Fusion 2.1 to Fusion 2.4.
-It contains a Python program which rewrites Fusion datasource configurations automatically:
-https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/src[upgrade-ds-2.1-to-2.4.py]
+The upgrade process varies depending on the version of Fusion being migrated.
 
-* The `bin` directory is used to upgrade Fusion 1.2 to Fusion 2.1.
+* Upgrading from Fusion 2.4 to Fusion 3.0, or from Fusion 2.1 to 2.4, uses the Python scripts in the `src` directory.
+It contains a Python program which rewrites Fusion datasource configurations automatically. See the docs above, or the abbreviated guide in this repo for more details:
+https://github.com/lucidworks/fusion-upgrade-scripts/blob/master/upgrade-to-3.0.md[upgrading to 3.0] or https://github.com/lucidworks/fusion-upgrade-scripts/blob/master/upgrade-to-2.4.asciidoc[upgrading to 2.4].
+
+* Upgrading from Fusion 1.2 to Fusion 2.1 uses utilities in the `bin` directory.
 It contains two utilities:
 
 ** Python script 
@@ -29,7 +37,7 @@ https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidwo
 
 ==== Python dependencies
 
-The python scripts run under Python 2.7. They have been tested with version 2.7.10.
+The python scripts run under Python 2.7. They have been tested with version 2.7.12.
 If this version of Python isn't available, you should use Python's
 https://virtualenv.pypa.io/en/stable/[virtualenv].
 
@@ -45,6 +53,6 @@ For an example recipe, see this blog post: https://opensourcehacker.com/2012/09/
 === Reference filesets
 
 To facilitate the task of identifying changes made run scrips and their configuration files,
-the directory `reference-files` contains copies of the contents of these directories for all Fusion releases.
+the directory `reference-files` contains copies of the contents of these directories for several Fusion releases.
 
 

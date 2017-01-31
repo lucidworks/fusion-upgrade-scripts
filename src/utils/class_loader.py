@@ -7,7 +7,7 @@ class ClassLoader:
 
   def get_class(self, classname):
 
-    logging.info("Loading class: {}".format(classname))
+    logging.debug("Loading class: {}".format(classname))
 
     if self.classes_cache.has_key(classname):
       return self.classes_cache.get(classname)
