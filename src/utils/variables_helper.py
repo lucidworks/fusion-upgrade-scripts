@@ -79,7 +79,7 @@ class VariablesHelper:
   @staticmethod
   def cleanup_fusion_version(version):
     # Remove SNAPSHOT or RC numbers from the version if present
-    m = re.search('\d+\.\d+\.\d+', version)
+    m = re.search('\d+\.\d+(\.\d+)?', version)
     if m is not None:
       return m.group(0)
     else:
