@@ -68,7 +68,9 @@ Steps to upgrade from Fusion 2.4.x to 3.0
     python upgrade-to-3.0.py --upgrade banana
     ```
 
-## Upgrade to Fusion 3.0 from Fusion 1.2.3 or 2.1
+11. Before accessing the Fusion UI, make sure to clear your browser's cache. Otherwise, you may inadvertently access a cached version of the old Fusion UI and see inconsistent behavior.
+
+## Upgrade to Fusion 3.0 from Fusion 1.2.3 
 
 1. Follow the upgrade from 1.2 to 2.4 https://doc.lucidworks.com/fusion/2.4/Installation_and_Configuration/Upgrading_Fusion/upgrade-1_2-to-2_4.html
 2. Once upgraded to 2.4, follow the steps above to upgrade from 2.4 to 3.0

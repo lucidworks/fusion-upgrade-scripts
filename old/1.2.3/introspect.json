@@ -1,0 +1,3301 @@
+{
+  "dynamicSchema::v1" : {
+    "name" : "com.lucidworks.apollo.resources.ManagedSchemaResource",
+    "uri" : "/dynamicSchema",
+    "methods" : [ {
+      "uri" : "/dynamicSchema/_changed",
+      "name" : "changeCallback",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/dynamicSchema/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "history::v1" : {
+    "name" : "com.lucidworks.apollo.resources.HistoryResource",
+    "uri" : "/history",
+    "methods" : [ {
+      "uri" : "/history",
+      "name" : "clearAllServiceHistory",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history",
+      "name" : "listAllServiceHistory",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}",
+      "name" : "clearServiceHistory",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}/items",
+      "name" : "listAllItemsHistory",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}/items/{item}",
+      "name" : "addItemHistory",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      }, {
+        "name" : "item",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/history/{service}/items/{item}",
+      "name" : "clearItemHistory",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      }, {
+        "name" : "item",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}/items",
+      "name" : "clearAllItemsHistory",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}/items/{item}",
+      "name" : "getItemHistory",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      }, {
+        "name" : "item",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}",
+      "name" : "getServiceHistory",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/history/{service}",
+      "name" : "addServiceHistory",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/history/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "query-pipelines::v1" : {
+    "name" : "com.lucidworks.apollo.resources.QueryPipelineResource",
+    "uri" : "/query-pipelines",
+    "methods" : [ {
+      "uri" : "/query-pipelines",
+      "name" : "listPipelines",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-pipelines",
+      "name" : "createPipeline",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-pipelines/{id}/collections/{collection}/{handler}",
+      "name" : "query",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "handler",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-pipelines/{id}/collections/{collection}/{handler}",
+      "name" : "queryWithPost",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "handler",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-pipelines/{id}",
+      "name" : "getPipeline",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-pipelines/{id}",
+      "name" : "deletePipeline",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-pipelines/{id}",
+      "name" : "createOrUpdatePipeline",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-pipelines/{id}/refresh",
+      "name" : "refreshPipeline",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-pipelines/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "solrconfig::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SolrConfigResource",
+    "uri" : "/collections/{collection}/solr-config",
+    "methods" : [ {
+      "uri" : "/collections/{collection}/solr-config",
+      "name" : "listConfigNodes",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "recursive",
+        "type" : "Boolean"
+      }, {
+        "name" : "expand",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/solr-config/{path:.*}",
+      "name" : "postFile",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "reload",
+        "type" : "Boolean"
+      }, {
+        "name" : "validate",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/solr-config/{path:.*}",
+      "name" : "putFile",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "reload",
+        "type" : "Boolean"
+      }, {
+        "name" : "validate",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/solr-config/{path:.*}",
+      "name" : "getConfigNodeAsString",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/solr-config/{path:.*}",
+      "name" : "getConfigNodeAsBytes",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/solr-config/{path:.*}",
+      "name" : "getConfigNode",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "recursive",
+        "type" : "Boolean"
+      }, {
+        "name" : "expand",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/solr-config/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "solrAdmin::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SolrAdminProxyResource",
+    "uri" : "/solrAdmin",
+    "methods" : [ {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyHeadRequestToSolr",
+      "verb" : "HEAD",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyOptionsRequestToSolr",
+      "verb" : "OPTIONS",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyGetRequestToSolr",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyPutRequestToSolr",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyPostRequestToSolr",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/solrAdmin/{searchClusterId}/{path:.*}",
+      "name" : "proxyDeleteRequestToSolr",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "searchClusterId",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solrAdmin/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "stopwords::v1" : {
+    "name" : "com.lucidworks.apollo.resources.StopwordsResource",
+    "uri" : "/stopwords",
+    "methods" : [ {
+      "uri" : "/stopwords/{collection}",
+      "name" : "get",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/stopwords/{collection}",
+      "name" : "put",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/stopwords/{collection}",
+      "name" : "importResource",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/stopwords/{collection}",
+      "name" : "exportResource",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/stopwords/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "collections::v1" : {
+    "name" : "com.lucidworks.apollo.resources.CollectionResource",
+    "uri" : "/collections",
+    "methods" : [ {
+      "uri" : "/collections",
+      "name" : "getCollections",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections",
+      "name" : "createCollection",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/features",
+      "name" : "listFeatures",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/features/{feature}",
+      "name" : "overwriteFeature",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "feature",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "callback",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/features/{feature}",
+      "name" : "resetFeature",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "feature",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "callback",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/stats",
+      "name" : "getCollectionMetrics",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}",
+      "name" : "overwriteCollection",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}",
+      "name" : "deleteCollection",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "solr",
+        "type" : "Boolean"
+      }, {
+        "name" : "purge",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/status",
+      "name" : "getCollectionStatus",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/features/{feature}",
+      "name" : "getFeature",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "feature",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}",
+      "name" : "getCollection",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "index-stages::v1" : {
+    "name" : "com.lucidworks.apollo.resources.IndexStageResource",
+    "uri" : "/index-stages",
+    "methods" : [ {
+      "uri" : "/index-stages/instances/{id}/{collection}/test",
+      "name" : "testStage",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-stages/{type}/metrics",
+      "name" : "getStageMetrics",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/schema",
+      "name" : "listStageSchemas",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/schema/{type}",
+      "name" : "getStageSchema",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/instances",
+      "name" : "listStageInstances",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/instances/{id}",
+      "name" : "getStageInstance",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/instances/{id}",
+      "name" : "deleteStageInstance",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-stages/instances/{id}",
+      "name" : "createOrUpdateStageInstance",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-stages/instances",
+      "name" : "createStage",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-stages/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "nodes::v1" : {
+    "name" : "com.lucidworks.apollo.resources.NodesResource",
+    "uri" : "/nodes",
+    "methods" : [ {
+      "uri" : "/nodes/hosts",
+      "name" : "hosts",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/nodes/up",
+      "name" : "up",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/nodes/upByHost",
+      "name" : "upByHost",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/nodes/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "index-profiles::v1" : {
+    "name" : "com.lucidworks.apollo.resources.IndexProfileResource",
+    "uri" : "/collections/{collection}/index-profiles",
+    "methods" : [ {
+      "uri" : "/collections/{collection}/index-profiles",
+      "name" : "listProfiles",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}/debug",
+      "name" : "debug",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}/index",
+      "name" : "index",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}/index",
+      "name" : "indexPipelineDocument",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}",
+      "name" : "getProfile",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}",
+      "name" : "addProfile",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/{alias}",
+      "name" : "removeProfile",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/index-profiles/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "schema::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SchemaResource",
+    "uri" : "/collections/{collection}/schema",
+    "methods" : [ {
+      "uri" : "/collections/{collection}/schema/fields",
+      "name" : "getFields",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/dynamicfields",
+      "name" : "getDynamicFields",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/fields",
+      "name" : "addField",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/schema/dynamicfields",
+      "name" : "addDynamicField",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/schema/fields/{field}",
+      "name" : "deleteField",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "field",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/dynamicfields/{field}",
+      "name" : "deleteDynamicField",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "field",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/fields/{fieldName}",
+      "name" : "updateField",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "fieldName",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/schema/dynamicfields/{fieldName}",
+      "name" : "updateDynamicField",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "fieldName",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/schema/dynamicfields.schema",
+      "name" : "getDynamicSchema",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/fields.schema",
+      "name" : "getSchema",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/schema/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "solr::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SolrProxyResource",
+    "uri" : "/solr",
+    "methods" : [ {
+      "uri" : "/solr",
+      "name" : "ok",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solr/{collection}/{path:.*}",
+      "name" : "proxyPutRequestToSolr",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/solr/{collection}/{path:.*}",
+      "name" : "proxyPostRequestToSolr",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/solr/{collection}/{path:.*}",
+      "name" : "proxyDeleteRequestToSolr",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/solr/{collection}/{path:.*}",
+      "name" : "proxyRequestToSolr",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "path",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/solr/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "query-stages::v1" : {
+    "name" : "com.lucidworks.apollo.resources.QueryStageResource",
+    "uri" : "/query-stages",
+    "methods" : [ {
+      "uri" : "/query-stages/test",
+      "name" : "testStage",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-stages/instances/{id}/test",
+      "name" : "testStageInstance",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/instances/{id}",
+      "name" : "getStageInstance",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/instances/{id}",
+      "name" : "deleteStageInstance",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/instances/{id}",
+      "name" : "createOrUpdateStageInstance",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-stages/instances",
+      "name" : "createStage",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/query-stages/schema/{type}",
+      "name" : "getStageSchema",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/schema",
+      "name" : "listStageSchemas",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/instances",
+      "name" : "listStageInstances",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/query-stages/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "recommend::v1" : {
+    "name" : "com.lucidworks.apollo.resources.RecommendationResource",
+    "uri" : "/recommend",
+    "methods" : [ {
+      "uri" : "/recommend",
+      "name" : "postRecommendation",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/recommend/{collection}/itemsForQuery",
+      "name" : "getItemsForQuery",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "q",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "Integer"
+      }, {
+        "name" : "fq",
+        "type" : "List"
+      }, {
+        "name" : "aggrRows",
+        "type" : "Integer"
+      }, {
+        "name" : "aggrType",
+        "type" : "String"
+      }, {
+        "name" : "debug",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/recommend/{collection}/queriesForItem",
+      "name" : "getQueriesForItem",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "docId",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "int"
+      }, {
+        "name" : "aggrType",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/recommend/{collection}/itemsForItem",
+      "name" : "getItemsForItem",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "docId",
+        "type" : "String"
+      }, {
+        "name" : "shinglesLimit",
+        "type" : "int"
+      }, {
+        "name" : "termsLimit",
+        "type" : "int"
+      }, {
+        "name" : "aggrRows",
+        "type" : "int"
+      }, {
+        "name" : "rows",
+        "type" : "int"
+      }, {
+        "name" : "aggrType",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/recommend/{collection}/relatedItems",
+      "name" : "getRelatedItems",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "item",
+        "type" : "String"
+      }, {
+        "name" : "type",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "int"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/recommend/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "connectors::v1" : {
+    "name" : "com.lucidworks.resources.ConnectorsResource",
+    "uri" : "/connectors",
+    "methods" : [ {
+      "uri" : "/connectors",
+      "name" : "getConnectorTypes0",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins",
+      "name" : "close",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "dry_run",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/status",
+      "name" : "reset",
+      "verb" : "PUT",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "initRegistry",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/state",
+      "name" : "reset",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/status",
+      "name" : "connectorsShutdown",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins",
+      "name" : "getConnectorTypes",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/pluginsByCategory",
+      "name" : "getConnectorTypesByCategory",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins",
+      "name" : "initConnector",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "alias",
+        "type" : "String"
+      }, {
+        "name" : "class_name",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}",
+      "name" : "getConnectorSpecs0",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/types",
+      "name" : "getConnectorSchemaTypes",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/types/{type}",
+      "name" : "getConnectorSchemaType",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      }, {
+        "name" : "type",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}",
+      "name" : "setClosing",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "close",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs/{id}",
+      "name" : "startJob",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs",
+      "name" : "listJobs",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs/{id}",
+      "name" : "getJobStatus",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs/{id}/pipeline",
+      "name" : "getPipelineStats",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs/{id}",
+      "name" : "stopJob",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "abort",
+        "type" : "boolean"
+      }, {
+        "name" : "wait_time",
+        "type" : "long"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/jobs",
+      "name" : "finishAllJobs",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "abort",
+        "type" : "boolean"
+      }, {
+        "name" : "wait_time",
+        "type" : "long"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources",
+      "name" : "addDataSource",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/connectors/datasources/{id}",
+      "name" : "getDataSource",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources",
+      "name" : "getDataSources",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}",
+      "name" : "removeDataSource",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "force",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources",
+      "name" : "removeDataSources",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "force",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}",
+      "name" : "updateDataSource",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/connectors/plugins/{connector}/resources/{name}",
+      "name" : "uploadResource",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/resources/{name}",
+      "name" : "deleteResource",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      }, {
+        "name" : "name",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/resources/{name}",
+      "name" : "openResource",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      }, {
+        "name" : "name",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/security_filter/{collection}",
+      "name" : "buildSecurityFilter",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "username",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/output",
+      "name" : "deleteOutputData",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db",
+      "name" : "dropDb",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db/{table}",
+      "name" : "getTableStats",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "table",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db/{table}",
+      "name" : "dropTable",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "table",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/validation",
+      "name" : "validateDataSource",
+      "verb" : "PUT",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "remove_unknown_props",
+        "type" : "boolean"
+      }, {
+        "name" : "verify_access",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/connectors/history/{id}",
+      "name" : "getHistory",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "cumulative",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/history/{id}",
+      "name" : "removeHistory",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/usage",
+      "name" : "getUsageNumbers",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db/{table}/items",
+      "name" : "getItems",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "table",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "start",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "int"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db/{table}/items/{item}",
+      "name" : "deleteItem",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "table",
+        "type" : "String"
+      }, {
+        "name" : "item",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db/{table}/items/{item}",
+      "name" : "getItem",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "table",
+        "type" : "String"
+      }, {
+        "name" : "item",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/plugins/{connector}/resources",
+      "name" : "listResources",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "connector",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/datasources/{id}/db",
+      "name" : "getDb",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/connectors/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "blobs::v1" : {
+    "name" : "com.lucidworks.apollo.resources.BlobResource",
+    "uri" : "/blobs",
+    "methods" : [ {
+      "uri" : "/blobs",
+      "name" : "listBlobManifests",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/blobs",
+      "name" : "postBlob",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/blobs",
+      "name" : "formUploadBlob",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/blobs/{id}/manifest",
+      "name" : "getBlobManifest",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/blobs/{id}",
+      "name" : "getBlob",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/blobs/{id}",
+      "name" : "putBlob",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/blobs/{id}",
+      "name" : "deleteFile",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/blobs/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "configurations::v1" : {
+    "name" : "com.lucidworks.apollo.resources.ConfigurationResource",
+    "uri" : "/configurations",
+    "methods" : [ {
+      "uri" : "/configurations",
+      "name" : "find",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "pattern",
+        "type" : "String"
+      }, {
+        "name" : "prefix",
+        "type" : "String"
+      }, {
+        "name" : "verbose",
+        "type" : "boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/configurations/{key}",
+      "name" : "setProperty",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "key",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/configurations/{key}",
+      "name" : "getProperty",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "key",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/configurations/{key}",
+      "name" : "createProperty",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "key",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/configurations/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "system::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SystemResource",
+    "uri" : "/system",
+    "methods" : [ {
+      "uri" : "/system/version",
+      "name" : "version",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/threads",
+      "name" : "threadDump",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/buffers",
+      "name" : "flushBuffers",
+      "verb" : "PUT",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/metricNames",
+      "name" : "getMetricNames",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "pattern",
+        "type" : "String"
+      }, {
+        "name" : "prefix",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/metric/{name}",
+      "name" : "getSingleMetric",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "name",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "pretty",
+        "type" : "Boolean"
+      }, {
+        "name" : "rateUnit",
+        "type" : "String"
+      }, {
+        "name" : "durationUnit",
+        "type" : "String"
+      }, {
+        "name" : "showSamples",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/teapot",
+      "name" : "teapot",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/logging/test",
+      "name" : "testLogging",
+      "verb" : "PUT",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "logLevel",
+        "type" : "String"
+      }, {
+        "name" : "message",
+        "type" : "String"
+      }, {
+        "name" : "flush",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/ping",
+      "name" : "ping",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/metrics",
+      "name" : "getMetrics",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "pretty",
+        "type" : "Boolean"
+      }, {
+        "name" : "rateUnit",
+        "type" : "String"
+      }, {
+        "name" : "durationUnit",
+        "type" : "String"
+      }, {
+        "name" : "showSamples",
+        "type" : "Boolean"
+      }, {
+        "name" : "pattern",
+        "type" : "String"
+      }, {
+        "name" : "prefix",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/system/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "index-pipelines::v1" : {
+    "name" : "com.lucidworks.apollo.resources.IndexPipelineResource",
+    "uri" : "/index-pipelines",
+    "methods" : [ {
+      "uri" : "/index-pipelines",
+      "name" : "listPipelines",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-pipelines",
+      "name" : "createPipeline",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/collections/{collection}/index",
+      "name" : "indexPipelineDocument",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/collections/{collection}/index",
+      "name" : "indexJson",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      }, {
+        "name" : "stageId",
+        "type" : "String"
+      }, {
+        "name" : "skipParsing",
+        "type" : "Boolean"
+      }, {
+        "name" : "autoDetectFormat",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/collections/{collection}/index",
+      "name" : "indexBytes",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      }, {
+        "name" : "stageId",
+        "type" : "String"
+      }, {
+        "name" : "skipParsing",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/collections/{collection}/debug",
+      "name" : "debugPipelineDocument",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/collections/{collection}/index",
+      "name" : "indexCsv",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      }, {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "simulate",
+        "type" : "Boolean"
+      }, {
+        "name" : "echo",
+        "type" : "Boolean"
+      }, {
+        "name" : "bufferDocsForSolr",
+        "type" : "Boolean"
+      }, {
+        "name" : "eventsCollection",
+        "type" : "String"
+      }, {
+        "name" : "eventsPipeline",
+        "type" : "String"
+      }, {
+        "name" : "eventTypes",
+        "type" : "String"
+      }, {
+        "name" : "stageId",
+        "type" : "String"
+      }, {
+        "name" : "skipParsing",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}",
+      "name" : "getPipeline",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-pipelines/{id}",
+      "name" : "deletePipeline",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-pipelines/{id}",
+      "name" : "createOrUpdatePipeline",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/index-pipelines/{id}/refresh",
+      "name" : "refreshPipeline",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/index-pipelines/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "query-pipeline-templates::v1" : {
+    "name" : "com.lucidworks.apollo.resources.QueryPipelineTemplateResource",
+    "uri" : "/pipeline-templates/query",
+    "methods" : [ {
+      "uri" : "/pipeline-templates/query/search-defaults",
+      "name" : "getSearchDefaultsTemplate",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/pipeline-templates/query/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "messaging::v1" : {
+    "name" : "com.lucidworks.apollo.resources.MessagingResource",
+    "uri" : "/messaging",
+    "methods" : [ {
+      "uri" : "/messaging",
+      "name" : "supportedMessageTypes",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/schedule/{id}",
+      "name" : "update",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/messaging/send",
+      "name" : "send",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/messaging/service/schema/{messageType}",
+      "name" : "getMessageServiceSchema",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "messageType",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/service/{messageType}",
+      "name" : "updateService",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "messageType",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/messaging/schedule/{id}",
+      "name" : "deleteScheduledItem",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/messaging/send/{messageType}/{id}",
+      "name" : "sendScheduled",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "messageType",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/service",
+      "name" : "serviceConfigurations",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/service/schema",
+      "name" : "listMessageServiceSchemas",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/scheduled",
+      "name" : "scheduled",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/service/{messageType}",
+      "name" : "removeService",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "messageType",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/messaging/service",
+      "name" : "addService",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/messaging/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "registration::v1" : {
+    "name" : "com.lucidworks.apollo.resources.RegistrationResource",
+    "uri" : "/registration",
+    "methods" : [ {
+      "uri" : "/registration",
+      "name" : "get",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/registration",
+      "name" : "update",
+      "verb" : "PUT",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/registration/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "searchLogs::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SearchLogsResource",
+    "uri" : "/searchLogs",
+    "methods" : [ {
+      "uri" : "/searchLogs/_changed",
+      "name" : "changeCallback",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/searchLogs/{collection}/searchlog",
+      "name" : "searchLogs",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/searchLogs/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "scheduler::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SchedulerResource",
+    "uri" : "/scheduler",
+    "methods" : [ {
+      "uri" : "/scheduler/schedules/{id}",
+      "name" : "deleteSchedule",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/schedules",
+      "name" : "getSchedules",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "creatorType",
+        "type" : "String"
+      }, {
+        "name" : "creatorId",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/schedules/{id}",
+      "name" : "updateSchedule",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/scheduler/jobs/{id}",
+      "name" : "stopRunningJob",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/jobs",
+      "name" : "getRunningJobs",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/jobs",
+      "name" : "stopRunningJobs",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/jobs/{id}",
+      "name" : "getRunningJob",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/schedules",
+      "name" : "deleteSchedules",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "creatorType",
+        "type" : "String"
+      }, {
+        "name" : "creatorId",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/schedules",
+      "name" : "addSchedule",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/scheduler/schedules/{id}",
+      "name" : "getSchedule",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/scheduler/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "aggregator::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SignalAggregatorResource",
+    "uri" : "/aggregator",
+    "methods" : [ {
+      "uri" : "/aggregator",
+      "name" : "getWorkerStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs/{collection}/{id}",
+      "name" : "stopJob",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/aggregations",
+      "name" : "postAggregation",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/aggregator/aggregations",
+      "name" : "listAggregations",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/aggregations/{id}",
+      "name" : "getAggregation",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/aggregations/{id}",
+      "name" : "deleteAggregation",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/aggregations/{id}",
+      "name" : "updateAggregation",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/aggregator/jobs/{collection}/{id}/output",
+      "name" : "deleteJobOutput",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "jobId",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs",
+      "name" : "stopAllJobs",
+      "verb" : "DELETE",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs",
+      "name" : "listAllJobs",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs/{collection}",
+      "name" : "listJobs",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs/{collection}",
+      "name" : "stopJobsForCollection",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs/{collection}",
+      "name" : "execUndefinedAggregation",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "time",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "String"
+      }, {
+        "name" : "sync",
+        "type" : "String"
+      }, {
+        "name" : "spark",
+        "type" : "String"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/aggregator/jobs/{collection}/{id}",
+      "name" : "execDefinedAggregation",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "time",
+        "type" : "String"
+      }, {
+        "name" : "rows",
+        "type" : "String"
+      }, {
+        "name" : "sync",
+        "type" : "String"
+      }, {
+        "name" : "spark",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/jobs/{collection}/{id}",
+      "name" : "getJobStatus",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/aggregator/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "query-profiles::v1" : {
+    "name" : "com.lucidworks.apollo.resources.QueryProfileResource",
+    "uri" : "/collections/{collection}/query-profiles",
+    "methods" : [ {
+      "uri" : "/collections/{collection}/query-profiles",
+      "name" : "listProfiles",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/{alias}/{handler}",
+      "name" : "query",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      }, {
+        "name" : "handler",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/{alias}/{handler}",
+      "name" : "queryWithPost",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      }, {
+        "name" : "handler",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/{alias}",
+      "name" : "getProfile",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/{alias}",
+      "name" : "addProfile",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/{alias}",
+      "name" : "removeProfile",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "alias",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/collections/{collection}/query-profiles/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "usage::v1" : {
+    "name" : "com.lucidworks.apollo.resources.UsageResource",
+    "uri" : "/usage",
+    "methods" : [ {
+      "uri" : "/usage",
+      "name" : "getUsageMetrics",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "local",
+        "type" : "Boolean"
+      }, {
+        "name" : "includeServerInfo",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/usage/id",
+      "name" : "getUUID",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/usage/counters",
+      "name" : "getCounters",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/usage/counters/{key}",
+      "name" : "getCounter",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "key",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/usage/counters/{key}",
+      "name" : "incrementCounter",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "key",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/usage/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "introspect::v1" : {
+    "name" : "com.lucidworks.apollo.resources.IntrospectionResource",
+    "uri" : "/introspect",
+    "methods" : [ {
+      "uri" : "/introspect",
+      "name" : "listServices",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "local",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/introspect/{service}",
+      "name" : "getServiceInstance",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "service",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/introspect/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "searchCluster::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SearchClusterResource",
+    "uri" : "/searchCluster",
+    "methods" : [ {
+      "uri" : "/searchCluster",
+      "name" : "listSearchClusters",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster",
+      "name" : "createSearchCluster",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "validate",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/searchCluster/{id}",
+      "name" : "deleteSearchCluster",
+      "verb" : "DELETE",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster/{id}",
+      "name" : "createOrUpdateSearchCluster",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "validate",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/searchCluster/{id}/nodes",
+      "name" : "getClusterState",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster/{id}",
+      "name" : "getSearchCluster",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster/{id}/systemInfo",
+      "name" : "getSystemInfo",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "nodeName",
+        "type" : "String"
+      }, {
+        "name" : "all",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster/_schema",
+      "name" : "getSchema",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/searchCluster/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "features::v1" : {
+    "name" : "com.lucidworks.apollo.resources.FeatureResource",
+    "uri" : "/features",
+    "methods" : [ {
+      "uri" : "/features",
+      "name" : "listFeatures",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/features/{feature}",
+      "name" : "getFeature",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "feature",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/features/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "index-pipeline-templates::v1" : {
+    "name" : "com.lucidworks.apollo.resources.IndexPipelineTemplateResource",
+    "uri" : "/pipeline-templates/index",
+    "methods" : [ {
+      "uri" : "/pipeline-templates/index/default",
+      "name" : "getDefaultTemplate",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ {
+        "name" : "id",
+        "type" : "String"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/pipeline-templates/index/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "synonyms::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SynonymsResource",
+    "uri" : "/synonyms",
+    "methods" : [ {
+      "uri" : "/synonyms/{collection}",
+      "name" : "get",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/synonyms/{collection}",
+      "name" : "put",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/synonyms/{collection}",
+      "name" : "importResource",
+      "verb" : "PUT",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/synonyms/{collection}",
+      "name" : "exportResource",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/synonyms/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "reports::v1" : {
+    "name" : "com.lucidworks.apollo.resources.ReportResource",
+    "uri" : "/reports",
+    "methods" : [ {
+      "uri" : "/reports/{collection}/{report}",
+      "name" : "run",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "report",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/reports/{collection}",
+      "name" : "list",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/reports/{collection}/{report}/{token}",
+      "name" : "getDocuments",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      }, {
+        "name" : "report",
+        "type" : "String"
+      }, {
+        "name" : "token",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "rows",
+        "type" : "Integer"
+      }, {
+        "name" : "start",
+        "type" : "Integer"
+      } ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/reports/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  },
+  "signals::v1" : {
+    "name" : "com.lucidworks.apollo.resources.SignalResource",
+    "uri" : "/signals",
+    "methods" : [ {
+      "uri" : "/signals/_changed",
+      "name" : "changeCallback",
+      "verb" : "POST",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/signals/{collection}",
+      "name" : "createSignals",
+      "verb" : "POST",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ {
+        "name" : "pipeline",
+        "type" : "String"
+      }, {
+        "name" : "commit",
+        "type" : "boolean"
+      }, {
+        "name" : "async",
+        "type" : "Boolean"
+      } ],
+      "hasEntity" : true
+    }, {
+      "uri" : "/signals/{collection}/i",
+      "name" : "processIncomingRequest",
+      "verb" : "GET",
+      "pathParams" : [ {
+        "name" : "collection",
+        "type" : "String"
+      } ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    }, {
+      "uri" : "/signals/status",
+      "name" : "getStatus",
+      "verb" : "GET",
+      "pathParams" : [ ],
+      "queryParams" : [ ],
+      "hasEntity" : false
+    } ]
+  }
+}
