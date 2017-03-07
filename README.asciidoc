@@ -33,7 +33,7 @@ which rewrites Fusion datasource and pipeline configurations in order to encode 
 https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[download_upload_ds_pipelines.py]
 
 ** Java program which rewrites pre-2.1 Fusion crawldb files to the data format introduced in Fusion 2.1:
-https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidworks.fusion-crawldb-migrator-0.1.0.jar]
+https://github.com/lucidworks/fusion-upgrade-scripts/tree/master/bin[com.lucidworks.fusion-crawldb-migrator-0.1.1.jar]
 
 ==== Python dependencies
 
