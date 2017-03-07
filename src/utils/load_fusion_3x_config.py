@@ -68,7 +68,7 @@ def load_config_from_file(path, service="ui"):
 
 
 def parse_solr_namespace(solr_zk_connect):
-    index = solr_zk_connect.index("/")
+    index = solr_zk_connect.find("/")
     if index != -1:
         return solr_zk_connect[index:len(solr_zk_connect)]
     else:
