@@ -80,3 +80,11 @@ def load_or_generate_config(fusion_home, service="ui"):
     config = load_config_from_file(config_file_path, service)
     config["solr.namespace"] = parse_solr_namespace(config["solr.zk.connect"])
     return config
+
+
+def load_or_generate_config3(fusion_home, service="ui"):
+    config_file_path = generate_config_file(fusion_home, service)
+    config = load_config_from_file(config_file_path, service)
+    os.remove(config_file_path)
+    config["solr.namespace"] = parse_solr_namespace(config["solr.zk.connect"])
+    return config
