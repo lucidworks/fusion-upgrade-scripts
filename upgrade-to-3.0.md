@@ -20,7 +20,7 @@ Steps to upgrade from Fusion 2.4.x to 3.0
 
 5. Copy data from older fusion instance to new fusion instance
 
-   `cp -R $FUSION_OLD_HOME/data/*  $FUSION_HOME/data/`
+   `cp -R $FUSION_OLD_HOME/data/  $FUSION_HOME/`
 
 6. Run the config upgrade step. This upgrades the customized properties in `$FUSION_OLD_HOME/conf/config.sh` to the new properties file in 3.0.0 (`$FUSION_HOME/conf/fusion.properties`)
 

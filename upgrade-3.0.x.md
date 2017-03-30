@@ -22,14 +22,13 @@ Steps to upgrade Fusion (for example from version 3.0.0 to 3.0.1)
 
 5. Copy data from older fusion instance to new fusion instance
 
-   `cp -R $FUSION_OLD_HOME/data/*  $FUSION_HOME/data/`
+   `cp -R $FUSION_OLD_HOME/data/  $FUSION_HOME/`
 
 6. Copy configs from older fusion instance to new fusion instance:
 
     ```
     mv $FUSION_HOME/conf/ $FUSION_HOME/conf_backup/
-    mkdir $FUSION_HOME/conf/
-    cp -R $FUSION_OLD_HOME/conf/*  $FUSION_HOME/conf/
+    cp -R $FUSION_OLD_HOME/conf/  $FUSION_HOME/
     ```
 
     If you are running distributed fusion, this step would have to be performed on all the Fusion nodes.
